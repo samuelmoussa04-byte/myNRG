@@ -639,8 +639,8 @@
   },
   "order": [
     "hero",
-    "shop",
     "strip",
+    "shop",
     "why",
     "problem",
     "results",
