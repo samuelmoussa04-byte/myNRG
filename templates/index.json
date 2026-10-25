@@ -29,8 +29,8 @@
         "stat-3": {
           "type": "stat",
           "settings": {
-            "value": "1 click",
-            "label": "to cancel a subscription"
+            "value": "30 days",
+            "label": "money-back guarantee"
           }
         }
       },
