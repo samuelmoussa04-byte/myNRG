@@ -1,0 +1,22 @@
+<footer class="site-footer" {{ section.shopify_attributes }}>
+  <div class="page-width site-footer__inner">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</span>
+    {% if section.settings.message != blank %}
+      <span>{{ section.settings.message | escape }}</span>
+    {% endif %}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Footer message",
+      "default": "Thanks for visiting."
+    }
+  ]
+}
+{% endschema %}

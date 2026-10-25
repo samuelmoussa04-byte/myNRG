@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Theme information",
+    "theme_name": "Storefront Starter",
+    "theme_version": "1.0.0",
+    "theme_author": "Store owner",
+    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent color",
+        "default": "#315c46"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#1b1b1b"
+      }
+    ]
+  }
+]
