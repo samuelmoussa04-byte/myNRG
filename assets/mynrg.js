@@ -98,14 +98,15 @@
         var pd = p.dataset;
         var pSub = c.type === 'sub' && pd.sellingPlan && pd.subPrice;
         var pPrice = pSub ? parseInt(pd.subPrice, 10) : parseInt(pd.price, 10);
+        var comparePrice = pSub ? parseInt(pd.price, 10) : parseInt(pd.comparePrice || '0', 10);
         var pDays = parseInt(pd.days || '30', 10) || 30;
         var card = p.closest('.pack');
         var strong = card && card.querySelector('[data-pack-price]');
         var per = card && card.querySelector('[data-pack-perday]');
         var was = card && card.querySelector('[data-pack-compare]');
         if (was) {
-          was.textContent = money(parseInt(pd.price, 10), form);
-          was.hidden = !pSub;
+          was.textContent = money(comparePrice > pPrice ? comparePrice : parseInt(pd.price, 10), form);
+          was.hidden = comparePrice <= pPrice;
         }
         if (strong) strong.textContent = money(pPrice, form);
         if (per) per.textContent = money(Math.round(pPrice / pDays), form) + '/day';

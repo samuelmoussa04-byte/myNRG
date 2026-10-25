@@ -1,4 +1,5 @@
 {%- comment -%} Product card for collection and search grids. Param: card_product {%- endcomment -%}
+{%- assign price_variant = card_product.selected_or_first_available_variant -%}
 <a class="pcard" href="{{ card_product.url }}">
   <div class="pcard__img">
     {%- if card_product.featured_media -%}
@@ -8,5 +9,11 @@
     {%- endif -%}
   </div>
   <span class="pcard__title">{{ card_product.title | escape }}</span>
-  <span class="pcard__price">{% if card_product.price_varies %}From {% endif %}{{ card_product.price_min | money }}</span>
+  <span class="pcard__price">
+    {% if card_product.price_varies %}From {% endif %}
+    {% if price_variant.price == card_product.price_min and price_variant.compare_at_price > price_variant.price %}
+      <s>{{ price_variant.compare_at_price | money }}</s>
+    {% endif %}
+    <strong>{{ card_product.price_min | money }}</strong>
+  </span>
 </a>

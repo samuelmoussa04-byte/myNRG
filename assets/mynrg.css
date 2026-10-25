@@ -481,6 +481,7 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
 .pcard__img img { width: 100%; height: 100%; object-fit: cover; }
 .pcard__title { font-weight: 650; font-size: 17px; letter-spacing: -.01em; }
 .pcard__price { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.pcard__price s { margin-right: 6px; color: var(--ink-3); }
 .empty-state { display: grid; gap: 18px; justify-items: start; }
 .search-form { display: flex; gap: 10px; max-width: 560px; margin-top: 20px; }
 .article-meta { margin-top: 12px; color: var(--ink-3); font-size: 14.5px; }

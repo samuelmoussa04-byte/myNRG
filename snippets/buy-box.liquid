@@ -138,14 +138,14 @@
           -%}
           <label class="pack">
             {%- if badge != blank -%}<span class="pack__flag">{{ badge | escape }}</span>{%- endif -%}
-            <input type="radio" name="pack" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} data-variant-id="{{ v.id }}" data-label="{{ vname | escape }}" data-price="{{ v.price }}"{% if alloc %} data-sub-price="{{ alloc.price }}" data-selling-plan="{{ alloc.selling_plan.id }}"{% endif %} data-days="{{ vdays }}">
+            <input type="radio" name="pack" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} data-variant-id="{{ v.id }}" data-label="{{ vname | escape }}" data-price="{{ v.price }}" data-compare-price="{{ v.compare_at_price | default: 0 }}"{% if alloc %} data-sub-price="{{ alloc.price }}" data-selling-plan="{{ alloc.selling_plan.id }}"{% endif %} data-days="{{ vdays }}">
             <span class="pack__radio" aria-hidden="true"></span>
             <span>
               <span class="pack__name">{{ vname | escape }}</span>
               <span class="pack__note">{% if v.available %}{{ note | escape }}{% else %}Sold out{% endif %}</span>
             </span>
             <span class="pack__price">
-              <s data-pack-compare hidden>{{ v.price | money }}</s>
+              <s data-pack-compare{% unless v.compare_at_price > v.price %} hidden{% endunless %}>{{ v.compare_at_price | default: v.price | money }}</s>
               <strong data-pack-price>{{ v.price | money }}</strong>
               <span data-pack-perday>{{ v.price | divided_by: vdays | money }}/day</span>
             </span>
