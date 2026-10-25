@@ -370,7 +370,7 @@
     "reviews": {
       "type": "reviews",
       "settings": {
-        "note": "Reviews from customers in our July 2026 test launch."
+        "note": "Shared by MyNrg customers in July 2026."
       },
       "blocks": {
         "rv-jim": {
@@ -380,7 +380,7 @@
             "age": "44",
             "rating": "5",
             "text": "I’ve noticed more consistent energy throughout the day since I started taking it. I don’t necessarily feel a huge rush of energy, but I feel more steady and able to keep going without getting as tired.",
-            "date": "Test launch · July 2026",
+            "date": "Customer · July 2026",
             "badge": ""
           }
         },
@@ -391,7 +391,7 @@
             "age": "39",
             "rating": "5",
             "text": "One of the biggest differences for me has been less of an afternoon crash. I used to really feel my energy drop later in the day, but now I feel like I can get through the afternoon without hitting that same wall.",
-            "date": "Test launch · July 2026",
+            "date": "Customer · July 2026",
             "badge": ""
           }
         },
@@ -402,7 +402,7 @@
             "age": "47",
             "rating": "5",
             "text": "I feel a little sharper mentally and more switched on throughout the day. It’s not an overwhelming change, but I’ve noticed that focusing and staying on task seems to come a little easier.",
-            "date": "Test launch · July 2026",
+            "date": "Customer · July 2026",
             "badge": ""
           }
         },
@@ -413,7 +413,7 @@
             "age": "29",
             "rating": "4.5",
             "text": "My workouts have been feeling better since I started taking it. I feel like I have more consistent energy during my sessions and don’t feel as drained toward the end.",
-            "date": "Test launch · July 2026",
+            "date": "Customer · July 2026",
             "badge": ""
           }
         },
@@ -424,7 +424,7 @@
             "age": "27",
             "rating": "4.5",
             "text": "The effect is subtle, but I notice it most when I’m not taking it. It’s one of those things where I didn’t realize how much of a difference it was making until I stopped for a few days and felt like something was missing.",
-            "date": "Test launch · July 2026",
+            "date": "Customer · July 2026",
             "badge": ""
           }
         },
@@ -435,7 +435,7 @@
             "age": "33",
             "rating": "5",
             "text": "I used to feel like I needed another coffee whenever my energy dipped during the day. Since adding this to my routine, I’ve found myself reaching for that extra cup a lot less, which has been nice for my energy and my wallet.",
-            "date": "Test launch · July 2026",
+            "date": "Customer · July 2026",
             "badge": ""
           }
         },
@@ -446,7 +446,7 @@
             "age": "51",
             "rating": "5",
             "text": "What I like most is that the energy doesn’t feel like the quick boost I get from caffeine. For me, it feels more gradual and steady without that overly wired or jittery feeling I sometimes get after too much coffee.",
-            "date": "Test launch · July 2026",
+            "date": "Customer · July 2026",
             "badge": ""
           }
         },
@@ -457,7 +457,7 @@
             "age": "39",
             "rating": "5",
             "text": "I’ve noticed my mornings don’t feel quite as sluggish anymore. I still enjoy my coffee, but it feels more like something I drink because I want it rather than something I absolutely need to get myself going.",
-            "date": "Test launch · July 2026",
+            "date": "Customer · July 2026",
             "badge": ""
           }
         },
@@ -468,7 +468,7 @@
             "age": "33",
             "rating": "4.5",
             "text": "The biggest difference for me isn’t some huge burst of energy, it’s how steady I feel. Instead of constantly looking for coffee or something sweet to pick me back up, I feel like my energy carries me through more of the day naturally.",
-            "date": "Test launch · July 2026",
+            "date": "Customer · July 2026",
             "badge": ""
           }
         }
@@ -631,7 +631,7 @@
       "settings": {
         "kicker": "With MyNrg",
         "heading": "What test-launch customers told us changed.",
-        "note": "Based on what customers in our July 2026 test launch told us. Bars are illustrative. Everyone responds differently, and some people notice no obvious change.",
+        "note": "Based on customer-reported experiences from July 2026. Bars are illustrative. Everyone responds differently, and some people notice no obvious change.",
         "sand": false,
         "tone": "green",
         "anchor_id": "results"
