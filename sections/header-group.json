@@ -15,7 +15,7 @@
       "type": "announcement-bar",
       "blocks": {
         "msg-ship": { "type": "message", "settings": { "text": "Ships to the US & Canada", "link": "", "icon": "truck" } },
-        "msg-nosub": { "type": "message", "settings": { "text": "Halloween offer: one bottle $34.99 USD (regularly $55 USD)", "link": "/#shop", "icon": "none" } },
+        "msg-nosub": { "type": "message", "settings": { "text": "HALLOWEEN SALE · SAVE 36% · SHOP NOW", "link": "/#shop", "icon": "none" } },
         "msg-cancel": { "type": "message", "settings": { "text": "Cancel subscriptions in one click", "link": "", "icon": "cancel" } }
       },
       "block_order": ["msg-ship", "msg-nosub", "msg-cancel"],

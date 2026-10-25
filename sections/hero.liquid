@@ -1,7 +1,23 @@
+{%- assign promo_product = section.settings.promo_product -%}
+{%- assign promo_variant = promo_product.selected_or_first_available_variant -%}
+{%- if promo_variant.compare_at_price > promo_variant.price -%}
+  {%- assign promo_savings = promo_variant.compare_at_price | minus: promo_variant.price -%}
+  {%- assign promo_percentage = promo_savings | times: 100.0 | divided_by: promo_variant.compare_at_price | round -%}
+{%- endif -%}
 <section class="hero"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | escape }}"{% endif %}>
   <div class="wrap hero__grid">
     <div>
       {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+      {%- if promo_variant.compare_at_price > promo_variant.price -%}
+        <div class="hero__promo" aria-label="Halloween offer: save {{ promo_percentage }} percent">
+          <span class="hero__promo-label">Halloween offer · Save {{ promo_percentage }}%</span>
+          <span class="hero__promo-prices">
+            <strong>{{ promo_variant.price | money }}</strong>
+            <s>{{ promo_variant.compare_at_price | money }}</s>
+          </span>
+          <span class="hero__promo-detail">One bottle · No code needed</span>
+        </div>
+      {%- endif -%}
       <h1 class="h1">{{ section.settings.heading | escape }}{% if section.settings.heading_accent != blank %} <span class="blue">{{ section.settings.heading_accent | escape }}</span>{% endif %}</h1>
       {%- if section.settings.text != blank -%}<p class="lede">{{ section.settings.text | escape }}</p>{%- endif -%}
       <div class="hero__cta">
@@ -47,6 +63,7 @@
     { "type": "text", "id": "button_link", "label": "Button link", "default": "#shop" },
     { "type": "text", "id": "link_label", "label": "Second link label", "default": "How it works" },
     { "type": "text", "id": "link_url", "label": "Second link", "default": "#how" },
+    { "type": "product", "id": "promo_product", "label": "Product for sale badge" },
     { "type": "image_picker", "id": "image", "label": "Image", "info": "Square works best. If empty, the built-in bottle photo is used." },
     { "type": "text", "id": "tag_title", "label": "Image tag, bold line", "default": "Daily support for cellular energy*" },
     { "type": "text", "id": "tag_text", "label": "Image tag, second line", "default": "Ships to the US & Canada" },
