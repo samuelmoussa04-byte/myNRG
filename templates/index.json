@@ -15,7 +15,7 @@
         "stat-1": {
           "type": "stat",
           "settings": {
-            "value": "30",
+            "value": "120",
             "label": "capsules in every bottle"
           }
         },
@@ -55,7 +55,7 @@
         "fact-2": {
           "type": "fact",
           "settings": {
-            "text": "30 capsules"
+            "text": "120 capsules"
           }
         },
         "fact-3": {
@@ -265,7 +265,8 @@
         "drawer-subs"
       ],
       "settings": {
-        "assure_1": "Halloween sale · Save 36%"
+        "assure_1": "Halloween sale · Save 36%",
+        "days_per_bottle": 120
       }
     },
     "compare": {
@@ -523,7 +524,7 @@
           "type": "question",
           "settings": {
             "question": "How many capsules come in each bottle?",
-            "answer": "<p>Each bottle contains 30 capsules, designed to fit conveniently into your daily routine. Please refer to the product's recommended serving size and directions for use.</p>",
+            "answer": "<p>Each bottle contains 120 capsules. At one capsule per day, that is a 120-day supply. Follow the product's recommended serving size and directions for use.</p>",
             "open": false
           }
         },

@@ -10,7 +10,7 @@
 {%- endcomment -%}
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
-  assign days_per = section.settings.days_per_bottle | default: 30
+  assign days_per = section.settings.days_per_bottle | default: 120
   assign anchor = section.settings.anchor_id | default: 'shop'
   assign tag = heading_tag | default: 'h2'
 
