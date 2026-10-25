@@ -40,7 +40,7 @@
       {%- if section.settings.image != blank -%}
         {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1200, 1400', sizes: '(min-width: 861px) 50vw, 100vw' }}
       {%- else -%}
-        <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="{{ section.settings.tag_title | escape }}" width="1400" height="1400" fetchpriority="high">
+        <img src="{{ 'mynrg-top-120.png' | asset_url }}" alt="{{ section.settings.tag_title | escape }}" width="1400" height="1400" fetchpriority="high">
       {%- endif -%}
       {%- if section.settings.tag_title != blank -%}
         <div class="photo__tag"><strong>{{ section.settings.tag_title | escape }}</strong>{{ section.settings.tag_text | escape }}</div>

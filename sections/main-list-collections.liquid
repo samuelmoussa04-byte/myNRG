@@ -10,7 +10,7 @@
             {%- if c.featured_image -%}
               {{ c.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: c.title }}
             {%- else -%}
-              <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="{{ c.title | escape }}" width="1400" height="1400" loading="lazy">
+              <img src="{{ 'mynrg-top-120.png' | asset_url }}" alt="{{ c.title | escape }}" width="1400" height="1400" loading="lazy">
             {%- endif -%}
           </div>
           <span class="pcard__title">{{ c.title | escape }}</span>

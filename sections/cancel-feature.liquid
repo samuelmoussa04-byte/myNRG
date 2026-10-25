@@ -22,7 +22,7 @@
             {%- if section.settings.image != blank -%}
               {{ section.settings.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
             {%- else -%}
-              <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="" width="56" height="56" loading="lazy">
+              <img src="{{ 'mynrg-top-120.png' | asset_url }}" alt="" width="56" height="56" loading="lazy">
             {%- endif -%}
           </div>
           <div><strong>{{ section.settings.mock_title | escape }}</strong><span>{{ section.settings.mock_text | escape }}</span></div>

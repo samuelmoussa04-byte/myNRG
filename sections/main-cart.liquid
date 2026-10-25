@@ -14,7 +14,7 @@
                 {%- if item.image -%}
                   {{ item.image | image_url: width: 240 | image_tag: alt: item.product.title, loading: 'lazy' }}
                 {%- else -%}
-                  <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="{{ item.product.title | escape }}" width="88" height="88" loading="lazy">
+                  <img src="{{ 'mynrg-top-120.png' | asset_url }}" alt="{{ item.product.title | escape }}" width="88" height="88" loading="lazy">
                 {%- endif -%}
               </a>
               <div>

@@ -5,7 +5,7 @@
     {%- if card_product.featured_media -%}
       {{ card_product.featured_media.preview_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300, 500, 800', sizes: '(min-width: 861px) 33vw, 50vw', alt: card_product.title }}
     {%- else -%}
-      <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="{{ card_product.title | escape }}" width="1400" height="1400" loading="lazy">
+      <img src="{{ 'mynrg-top-120.png' | asset_url }}" alt="{{ card_product.title | escape }}" width="1400" height="1400" loading="lazy">
     {%- endif -%}
   </div>
   <span class="pcard__title">{{ card_product.title | escape }}</span>

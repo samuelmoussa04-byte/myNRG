@@ -56,7 +56,7 @@
         {%- endfor -%}
       {%- else -%}
         <div data-slide="0">
-          <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="1400" height="1400" loading="lazy">
+          <img src="{{ 'mynrg-top-120.png' | asset_url }}" alt="{{ product.title | escape }}" width="1400" height="1400" loading="lazy">
         </div>
       {%- endif -%}
     </div>
@@ -206,7 +206,7 @@
       {%- if product.featured_media -%}
         {{ product.featured_media.preview_image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
       {%- else -%}
-        <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="" width="44" height="44" loading="lazy">
+        <img src="{{ 'mynrg-top-120.png' | asset_url }}" alt="" width="44" height="44" loading="lazy">
       {%- endif -%}
     </div>
     <div class="sticky-buy__txt"><strong>{{ product.title | escape }}</strong><span data-sticky-price>{{ current_variant.price | money }}</span></div>

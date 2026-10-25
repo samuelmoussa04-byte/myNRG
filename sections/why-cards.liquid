@@ -22,7 +22,7 @@
                   {%- if top_img != blank -%}
                     {{ top_img | image_url: width: 1000 | image_tag: class: 'scene__bottle', alt: '', loading: 'lazy' }}
                   {%- else -%}
-                    <img class="scene__bottle" src="{{ 'mynrg-top.jpg' | asset_url }}" alt="" width="1400" height="1400" loading="lazy">
+                    <img class="scene__bottle" src="{{ 'mynrg-top-120.png' | asset_url }}" alt="" width="1400" height="1400" loading="lazy">
                   {%- endif -%}
                   <div class="sticky-note"><b>{{ block.settings.scene_text_1 | escape }}</b><span><u>{{ block.settings.scene_text_2 | escape }}</u></span></div>
                 </div>
@@ -32,7 +32,7 @@
                     {%- if front_img != blank -%}
                       {{ front_img | image_url: width: 1000 | image_tag: alt: '', loading: 'lazy' }}
                     {%- else -%}
-                      <img src="{{ 'mynrg-front.jpg' | asset_url }}" alt="" width="1400" height="1400" loading="lazy">
+                      <img src="{{ 'mynrg-front-120.png' | asset_url }}" alt="" width="1400" height="1400" loading="lazy">
                     {%- endif -%}
                   </div>
                   <div class="cal">
@@ -55,7 +55,7 @@
                         {%- if top_img != blank -%}
                           {{ top_img | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
                         {%- else -%}
-                          <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="" width="90" height="90" loading="lazy">
+                          <img src="{{ 'mynrg-top-120.png' | asset_url }}" alt="" width="90" height="90" loading="lazy">
                         {%- endif -%}
                         <div><b>{{ block.settings.scene_text_1 | escape }}</b><span>{{ block.settings.scene_text_2 | escape }}</span></div>
                       </div>

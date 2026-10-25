@@ -12,7 +12,7 @@
         {%- if section.settings.image != blank -%}
           {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 800, 1200', sizes: '(min-width: 861px) 45vw, 100vw' }}
         {%- else -%}
-          <img src="{{ 'mynrg-front.jpg' | asset_url }}" alt="MyNrg NAD+ Resveratrol" width="1400" height="1400" loading="lazy">
+          <img src="{{ 'mynrg-front-120.png' | asset_url }}" alt="MyNrg NAD+ Resveratrol" width="1400" height="1400" loading="lazy">
         {%- endif -%}
       </div>
     </div>
