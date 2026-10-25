@@ -262,7 +262,9 @@
         "drawer-shipping",
         "drawer-subs"
       ],
-      "settings": {}
+      "settings": {
+        "assure_1": "Halloween offer: $34.99 USD (regularly $55 USD)"
+      }
     },
     "compare": {
       "type": "compare-table",
