@@ -1,19 +1,12 @@
-<article class="product-card">
-  <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
-    {% if product.featured_image %}
-      {{
-        product.featured_image
-        | image_url: width: 800
-        | image_tag: class: 'product-card__image', loading: 'lazy', widths: '300, 500, 800'
-      }}
-    {% else %}
-      <div class="product-card__image product-card__image--placeholder">No image</div>
-    {% endif %}
-  </a>
-  <div class="product-card__details">
-    <a class="product-card__title" href="{{ product.url }}">{{ product.title | escape }}</a>
-    <span class="product-card__price">
-      {% if product.price_varies %}From {% endif %}{{ product.price | money }}
-    </span>
+{%- comment -%} Product card for collection and search grids. Param: card_product {%- endcomment -%}
+<a class="pcard" href="{{ card_product.url }}">
+  <div class="pcard__img">
+    {%- if card_product.featured_media -%}
+      {{ card_product.featured_media.preview_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300, 500, 800', sizes: '(min-width: 861px) 33vw, 50vw', alt: card_product.title }}
+    {%- else -%}
+      <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="{{ card_product.title | escape }}" width="1400" height="1400" loading="lazy">
+    {%- endif -%}
   </div>
-</article>
+  <span class="pcard__title">{{ card_product.title | escape }}</span>
+  <span class="pcard__price">{% if card_product.price_varies %}From {% endif %}{{ card_product.price_min | money }}</span>
+</a>

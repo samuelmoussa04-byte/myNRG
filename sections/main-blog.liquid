@@ -1,0 +1,29 @@
+<section class="page-head">
+  <div class="wrap"><h1 class="h1 h1--page">{{ blog.title | escape }}</h1></div>
+</section>
+<section class="sec" style="padding-top:8px">
+  <div class="wrap">
+    {%- paginate blog.articles by 12 -%}
+      <div class="pgrid">
+        {%- for article in blog.articles -%}
+          <a class="pcard" href="{{ article.url }}">
+            {%- if article.image -%}
+              <div class="pcard__img">{{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: article.title }}</div>
+            {%- endif -%}
+            <span class="pcard__title">{{ article.title | escape }}</span>
+            <span class="pcard__price">{{ article.published_at | date: '%B %-d, %Y' }}</span>
+          </a>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}<div style="margin-top:32px">{{ paginate | default_pagination }}</div>{%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "tag": "div",
+  "settings": []
+}
+{% endschema %}

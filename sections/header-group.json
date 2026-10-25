@@ -1,0 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "msg-ship": { "type": "message", "settings": { "text": "Ships to the US & Canada", "link": "", "icon": "truck" } },
+        "msg-nosub": { "type": "message", "settings": { "text": "No subscription required", "link": "", "icon": "free" } },
+        "msg-cancel": { "type": "message", "settings": { "text": "Cancel subscriptions in one click", "link": "", "icon": "cancel" } }
+      },
+      "block_order": ["msg-ship", "msg-nosub", "msg-cancel"],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "logo_text_1": "My",
+        "logo_text_2": "Nrg",
+        "show_button": true,
+        "button_label": "Shop now",
+        "button_link": "/#shop"
+      }
+    }
+  },
+  "order": ["announcement", "header"]
+}

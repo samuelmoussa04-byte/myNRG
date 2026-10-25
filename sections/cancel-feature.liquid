@@ -1,0 +1,60 @@
+<section class="sec"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | escape }}"{% endif %}>
+  <div class="wrap cancel">
+    <div>
+      {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+      <h2 class="h2">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}<p class="lede">{{ section.settings.text | escape }}</p>{%- endif -%}
+      {%- if section.settings.ticks != blank -%}
+        {%- assign ticks = section.settings.ticks | newline_to_br | split: '<br />' -%}
+        <ul class="ticks">
+          {%- for t in ticks -%}
+            {%- assign clean = t | strip -%}
+            {%- if clean != blank -%}<li><svg aria-hidden="true"><use href="#i-check"/></svg>{{ clean | escape }}</li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+    <div class="mock" aria-label="Illustration of the subscriptions page in your account">
+      <div class="mock__win">
+        <p class="mock__label">{{ request.host }}/account · Subscriptions</p>
+        <div class="mock__sub">
+          <div class="mock__thumb">
+            {%- if section.settings.image != blank -%}
+              {{ section.settings.image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
+            {%- else -%}
+              <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="" width="56" height="56" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div><strong>{{ section.settings.mock_title | escape }}</strong><span>{{ section.settings.mock_text | escape }}</span></div>
+        </div>
+        <div class="mock__actions" aria-hidden="true">
+          <span class="mock__btn">Skip</span>
+          <span class="mock__btn">Edit</span>
+          <span class="mock__btn mock__btn--cancel">Cancel<svg class="mock__cursor"><use href="#i-cursor"/></svg></span>
+        </div>
+        <div class="mock__done"><svg aria-hidden="true"><use href="#i-check"/></svg>{{ section.settings.mock_done | escape }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "One-click cancel",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Small label", "default": "Subscriptions" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Cancel in one click. Really." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "The most common complaint about NAD+ brands isn't the product. It's getting stuck in a subscription. So subscribing is optional, and leaving is one button." },
+    { "type": "textarea", "id": "ticks", "label": "Check list", "info": "One per line.", "default": "No phone call\nNo email to \"process your request\"\nNo discount offers to talk you out of it" },
+    { "type": "header", "content": "Illustration" },
+    { "type": "image_picker", "id": "image", "label": "Product thumbnail" },
+    { "type": "text", "id": "mock_title", "label": "Product name", "default": "NAD+ Resveratrol" },
+    { "type": "text", "id": "mock_text", "label": "Delivery line", "default": "1 bottle every 3 weeks" },
+    { "type": "text", "id": "mock_done", "label": "Confirmation line", "default": "Subscription cancelled. You won't be charged again." },
+    { "type": "text", "id": "anchor_id", "label": "Section ID (optional)", "default": "cancel" }
+  ],
+  "presets": [ { "name": "One-click cancel" } ],
+  "disabled_on": { "groups": ["header", "footer"] }
+}
+{% endschema %}

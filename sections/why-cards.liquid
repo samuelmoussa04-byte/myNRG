@@ -1,0 +1,131 @@
+{%- liquid
+  assign top_img = section.settings.photo_top
+  assign front_img = section.settings.photo_front
+-%}
+<section class="sec"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | escape }}"{% endif %}>
+  <div class="wrap">
+    <div class="sec-head">
+      {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+      <h2 class="h2">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="cards3">
+      {%- for block in section.blocks -%}
+        <article class="vcard" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="vcard__art photo">
+              {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 861px) 33vw, 100vw' }}
+            </div>
+          {%- else -%}
+            {%- case block.settings.scene -%}
+              {%- when 'morning' -%}
+                <div class="vcard__art scene scene--am" role="img" aria-label="Bottle with a handwritten note: {{ block.settings.scene_text_1 | escape }} {{ block.settings.scene_text_2 | escape }}">
+                  {%- if top_img != blank -%}
+                    {{ top_img | image_url: width: 1000 | image_tag: class: 'scene__bottle', alt: '', loading: 'lazy' }}
+                  {%- else -%}
+                    <img class="scene__bottle" src="{{ 'mynrg-top.jpg' | asset_url }}" alt="" width="1400" height="1400" loading="lazy">
+                  {%- endif -%}
+                  <div class="sticky-note"><b>{{ block.settings.scene_text_1 | escape }}</b><span><u>{{ block.settings.scene_text_2 | escape }}</u></span></div>
+                </div>
+              {%- when 'afternoon' -%}
+                <div class="vcard__art scene scene--pm" role="img" aria-label="Bottle next to a calendar with {{ block.settings.scene_text_1 | escape }} at {{ block.settings.scene_text_2 | escape }} highlighted">
+                  <div class="scene__crop">
+                    {%- if front_img != blank -%}
+                      {{ front_img | image_url: width: 1000 | image_tag: alt: '', loading: 'lazy' }}
+                    {%- else -%}
+                      <img src="{{ 'mynrg-front.jpg' | asset_url }}" alt="" width="1400" height="1400" loading="lazy">
+                    {%- endif -%}
+                  </div>
+                  <div class="cal">
+                    <div class="cal__head"><span>Tuesday</span><strong>14</strong></div>
+                    <ul>
+                      <li><i></i><div><b>Lunch</b><span>12:30 – 1:15 PM</span></div></li>
+                      <li class="is-now"><i></i><div><b>{{ block.settings.scene_text_1 | escape }}</b><span>{{ block.settings.scene_text_2 | escape }}</span></div><em>Now</em></li>
+                      <li><i></i><div><b>School pickup</b><span>4:45 PM</span></div></li>
+                    </ul>
+                  </div>
+                </div>
+              {%- when 'cancel' -%}
+                <div class="vcard__art scene scene--off" role="img" aria-label="Phone browser open to the account page with a Cancel subscription button">
+                  <div class="phone">
+                    <div class="phone__screen">
+                      <div class="phone__status"><span>9:41</span><i></i></div>
+                      <div class="phone__url"><svg aria-hidden="true"><use href="#i-lock"/></svg>{{ request.host }}/account</div>
+                      <div class="phone__title">Subscriptions</div>
+                      <div class="phone__item">
+                        {%- if top_img != blank -%}
+                          {{ top_img | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
+                        {%- else -%}
+                          <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="" width="90" height="90" loading="lazy">
+                        {%- endif -%}
+                        <div><b>{{ block.settings.scene_text_1 | escape }}</b><span>{{ block.settings.scene_text_2 | escape }}</span></div>
+                      </div>
+                      <div class="phone__btn">Skip next delivery</div>
+                      <div class="phone__btn phone__btn--cancel">Cancel subscription<span class="phone__tap"></span></div>
+                    </div>
+                  </div>
+                </div>
+              {%- else -%}
+                <div class="vcard__art"></div>
+            {%- endcase -%}
+          {%- endif -%}
+          <div class="vcard__body">
+            <h3 class="h3">{{ block.settings.title | escape }}</h3>
+            <p>{{ block.settings.text | escape }}</p>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Why cards",
+  "tag": "div",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Small label", "default": "Why MyNrg" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Made for the afternoon. Taken at breakfast." },
+    { "type": "header", "content": "Bottle photos used in the scenes" },
+    { "type": "image_picker", "id": "photo_top", "label": "Top-down bottle photo", "info": "If empty, the built-in photo is used." },
+    { "type": "image_picker", "id": "photo_front", "label": "Front bottle photo", "info": "If empty, the built-in photo is used." },
+    { "type": "text", "id": "anchor_id", "label": "Section ID (optional)", "default": "why" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Upload a photo to replace the built-in scene." },
+        {
+          "type": "select",
+          "id": "scene",
+          "label": "Built-in scene (when no photo)",
+          "default": "morning",
+          "options": [
+            { "value": "morning", "label": "Bottle + sticky note" },
+            { "value": "afternoon", "label": "Bottle + calendar" },
+            { "value": "cancel", "label": "Phone with cancel button" },
+            { "value": "none", "label": "None" }
+          ]
+        },
+        { "type": "text", "id": "scene_text_1", "label": "Scene text 1", "info": "Sticky note line 1, calendar event, or subscription name.", "default": "With breakfast" },
+        { "type": "text", "id": "scene_text_2", "label": "Scene text 2", "info": "Sticky note line 2, event time, or delivery frequency.", "default": "before 10am!" },
+        { "type": "text", "id": "title", "label": "Title", "default": "One capsule routine, before 10am." },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Take it with breakfast. Some people find NAD+ supplements taken late in the day affect their sleep, so mornings are the simple choice." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why cards",
+      "blocks": [
+        { "type": "card", "settings": { "scene": "morning" } },
+        { "type": "card", "settings": { "scene": "afternoon", "scene_text_1": "Q4 planning", "scene_text_2": "3:00 – 4:00 PM", "title": "Built around 3pm.", "text": "Your cells use NAD+ to turn food into energy.* MyNrg is daily support for the part of the day that drags the most." } },
+        { "type": "card", "settings": { "scene": "cancel", "scene_text_1": "NAD+ Resveratrol", "scene_text_2": "Every 3 weeks", "title": "No strings.", "text": "Buy one bottle and you're done. If you choose to subscribe, cancelling is one click in your account." } }
+      ]
+    }
+  ],
+  "disabled_on": { "groups": ["header", "footer"] }
+}
+{% endschema %}

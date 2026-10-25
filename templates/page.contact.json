@@ -1,0 +1,29 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-contact",
+      "settings": {}
+    },
+    "answers": {
+      "type": "quick-answers",
+      "blocks": {
+        "a-order": { "type": "answer", "settings": { "title": "Where's my order?", "text": "Your shipping confirmation email has a tracking link. Can't find it? Send us your order number and we'll check.", "link_label": "", "link": "" } },
+        "a-subs": { "type": "answer", "settings": { "title": "Change or cancel a subscription", "text": "Log in to your account and open Subscriptions to skip, edit or cancel. No email needed.", "link_label": "Go to my account", "link": "/account" } },
+        "a-ship": { "type": "answer", "settings": { "title": "Shipping", "text": "We ship to the United States and Canada. Rates and delivery times are shown at checkout.", "link_label": "", "link": "" } },
+        "a-refund": { "type": "answer", "settings": { "title": "30-day money-back guarantee", "text": "Not for you? Email us within 30 days of delivery for a full refund, even if you've opened the bottle. Choose \"A refund\" in the form above.", "link_label": "", "link": "" } }
+      },
+      "block_order": ["a-order", "a-subs", "a-ship", "a-refund"],
+      "settings": {}
+    }
+  },
+  "order": ["main", "answers"]
+}

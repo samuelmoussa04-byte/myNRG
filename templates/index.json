@@ -1,14 +1,652 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
-      "type": "hero"
+      "type": "hero",
+      "blocks": {
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "value": "30",
+            "label": "capsules in every bottle"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "value": "1",
+            "label": "capsule a day"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "value": "1 click",
+            "label": "to cancel a subscription"
+          }
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3"
+      ],
+      "settings": {}
     },
-    "featured_collection": {
-      "type": "featured-collection"
+    "strip": {
+      "type": "facts-strip",
+      "blocks": {
+        "fact-1": {
+          "type": "fact",
+          "settings": {
+            "text": "Daily support for cellular energy*"
+          }
+        },
+        "fact-2": {
+          "type": "fact",
+          "settings": {
+            "text": "30 capsules"
+          }
+        },
+        "fact-3": {
+          "type": "fact",
+          "settings": {
+            "text": "Take it before 10am"
+          }
+        },
+        "fact-4": {
+          "type": "fact",
+          "settings": {
+            "text": "Ships to the US & Canada"
+          }
+        },
+        "fact-5": {
+          "type": "fact",
+          "settings": {
+            "text": "No subscription required"
+          }
+        },
+        "fact-6": {
+          "type": "fact",
+          "settings": {
+            "text": "Cancel in one click"
+          }
+        }
+      },
+      "block_order": [
+        "fact-1",
+        "fact-2",
+        "fact-3",
+        "fact-4",
+        "fact-5",
+        "fact-6"
+      ],
+      "settings": {}
+    },
+    "why": {
+      "type": "why-cards",
+      "blocks": {
+        "card-morning": {
+          "type": "card",
+          "settings": {
+            "scene": "morning",
+            "scene_text_1": "With breakfast",
+            "scene_text_2": "before 10am!",
+            "title": "One capsule routine, before 10am.",
+            "text": "Take it with breakfast. Some people find NAD+ supplements taken late in the day affect their sleep, so mornings are the simple choice."
+          }
+        },
+        "card-afternoon": {
+          "type": "card",
+          "settings": {
+            "scene": "afternoon",
+            "scene_text_1": "Q4 planning",
+            "scene_text_2": "3:00 – 4:00 PM",
+            "title": "Built around 3pm.",
+            "text": "Your cells use NAD+ to turn food into energy.* MyNrg is daily support for the part of the day that drags the most."
+          }
+        },
+        "card-cancel": {
+          "type": "card",
+          "settings": {
+            "scene": "cancel",
+            "scene_text_1": "NAD+ Resveratrol",
+            "scene_text_2": "Every 3 weeks",
+            "title": "No strings.",
+            "text": "Buy one bottle and you're done. If you choose to subscribe, cancelling is one click in your account."
+          }
+        }
+      },
+      "block_order": [
+        "card-morning",
+        "card-afternoon",
+        "card-cancel"
+      ],
+      "settings": {}
+    },
+    "problem": {
+      "type": "day-slots",
+      "blocks": {
+        "slot-1": {
+          "type": "slot",
+          "settings": {
+            "time": "7:00",
+            "period": "AM",
+            "level": 85,
+            "text": "Up before the alarm. Feeling fine.",
+            "highlight": false
+          }
+        },
+        "slot-2": {
+          "type": "slot",
+          "settings": {
+            "time": "1:15",
+            "period": "PM",
+            "level": 55,
+            "text": "Second coffee. It used to fix the afternoon.",
+            "highlight": false
+          }
+        },
+        "slot-3": {
+          "type": "slot",
+          "settings": {
+            "time": "3:07",
+            "period": "PM",
+            "level": 20,
+            "text": "Reading the same email for the fourth time.",
+            "highlight": true
+          }
+        },
+        "slot-4": {
+          "type": "slot",
+          "settings": {
+            "time": "9:40",
+            "period": "PM",
+            "level": 35,
+            "text": "Too tired to do anything. Not tired enough to sleep.",
+            "highlight": false
+          }
+        }
+      },
+      "block_order": [
+        "slot-1",
+        "slot-2",
+        "slot-3",
+        "slot-4"
+      ],
+      "settings": {
+        "note": "A standard blood test won't show it. One part of the picture researchers point to is NAD+, a coenzyme that falls as we age."
+      }
+    },
+    "how": {
+      "type": "how-it-works",
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "title": "Your cells run on NAD+",
+            "text": "NAD+ is a coenzyme found in every cell. Your cells use it to turn food into usable energy.",
+            "highlight": false
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "title": "Levels drop as you age",
+            "text": "Studies in people show lower NAD+ in older adults. Researchers point to an enzyme called CD38, which uses up more NAD+ as inflammation rises.",
+            "highlight": false
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "title": "MyNrg supports your levels, daily",
+            "text": "One morning routine that supports healthy NAD+ levels and cellular energy.* Sleep, movement and less inflammation help too.",
+            "highlight": true
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3"
+      ],
+      "settings": {}
+    },
+    "promise": {
+      "type": "promise",
+      "settings": {}
+    },
+    "shop": {
+      "type": "featured-product",
+      "blocks": {
+        "drawer-facts": {
+          "type": "drawer",
+          "settings": {
+            "title": "Supplement Facts"
+          }
+        },
+        "drawer-howto": {
+          "type": "drawer",
+          "settings": {
+            "title": "How to take it",
+            "content": "<p>Take one capsule a day with breakfast, before 10am.</p>"
+          }
+        },
+        "drawer-shipping": {
+          "type": "drawer",
+          "settings": {
+            "title": "Shipping",
+            "content": "<p>We ship to the United States and Canada. Delivery times and rates are shown at checkout.</p>"
+          }
+        },
+        "drawer-subs": {
+          "type": "drawer",
+          "settings": {
+            "title": "Subscriptions and cancelling",
+            "content": "<p>Subscribing is optional. If you do, open your account, go to Subscriptions and press Cancel. No phone call and no email.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "drawer-facts",
+        "drawer-howto",
+        "drawer-shipping",
+        "drawer-subs"
+      ],
+      "settings": {}
+    },
+    "compare": {
+      "type": "compare-table",
+      "blocks": {
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "label": "No needles",
+            "c1": "yes",
+            "c2": "no",
+            "c3": "no"
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "label": "No appointment or prescription",
+            "c1": "yes",
+            "c2": "no",
+            "c3": "no"
+          }
+        },
+        "row-3": {
+          "type": "row",
+          "settings": {
+            "label": "Taken at home",
+            "c1": "yes",
+            "c2": "no",
+            "c3": "yes"
+          }
+        },
+        "row-4": {
+          "type": "row",
+          "settings": {
+            "label": "No ongoing plan required",
+            "c1": "yes",
+            "c2": "yes",
+            "c3": "Usually monthly"
+          }
+        },
+        "row-5": {
+          "type": "row",
+          "settings": {
+            "label": "Typical cost",
+            "c1": "From {price} per bottle",
+            "c2": "$429–$879 per session",
+            "c3": "$99–$249 per month"
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5"
+      ],
+      "settings": {}
+    },
+    "science": {
+      "type": "science",
+      "blocks": {
+        "study-1": {
+          "type": "study",
+          "settings": {
+            "tag": "Studied in people",
+            "title": "NAD+ is lower as we age.",
+            "text": "When researchers measured NAD+ in adults of different ages, older people had lower levels, in both blood and skin.",
+            "source_1": "Clement et al., Rejuvenation Research, 2019",
+            "source_1_url": "https://pubmed.ncbi.nlm.nih.gov/30124109/",
+            "source_2": "Massudi et al., PLoS One, 2012",
+            "source_2_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0042357"
+          }
+        },
+        "study-2": {
+          "type": "study",
+          "settings": {
+            "tag": "Studied in people",
+            "title": "Precursors raise NAD+ in people.",
+            "text": "In randomized, placebo-controlled trials, healthy adults who took NAD+ precursors had higher NAD+ levels in their blood than those who took a placebo. These studies tested NMN and NR, not NAD+ taken directly.",
+            "source_1": "Martens et al., Nature Communications, 2018",
+            "source_1_url": "https://www.nature.com/articles/s41467-018-03421-7",
+            "source_2": "Yi et al., GeroScience, 2023",
+            "source_2_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9735188/"
+          }
+        }
+      },
+      "block_order": [
+        "study-1",
+        "study-2"
+      ],
+      "settings": {
+        "text": "The short version: NAD+ is lower in older adults, and in human trials, the NAD+ precursors NMN and NR raised it."
+      }
+    },
+    "safety": {
+      "type": "safety-note",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "note": "Reviews from customers in our July 2026 test launch."
+      },
+      "blocks": {
+        "rv-jim": {
+          "type": "review",
+          "settings": {
+            "name": "Jim",
+            "age": "44",
+            "rating": "5",
+            "text": "I’ve noticed more consistent energy throughout the day since I started taking it. I don’t necessarily feel a huge rush of energy, but I feel more steady and able to keep going without getting as tired.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-deborah": {
+          "type": "review",
+          "settings": {
+            "name": "Deborah",
+            "age": "39",
+            "rating": "5",
+            "text": "One of the biggest differences for me has been less of an afternoon crash. I used to really feel my energy drop later in the day, but now I feel like I can get through the afternoon without hitting that same wall.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-jane": {
+          "type": "review",
+          "settings": {
+            "name": "Jane",
+            "age": "47",
+            "rating": "5",
+            "text": "I feel a little sharper mentally and more switched on throughout the day. It’s not an overwhelming change, but I’ve noticed that focusing and staying on task seems to come a little easier.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-ronald": {
+          "type": "review",
+          "settings": {
+            "name": "Ronald",
+            "age": "29",
+            "rating": "4.5",
+            "text": "My workouts have been feeling better since I started taking it. I feel like I have more consistent energy during my sessions and don’t feel as drained toward the end.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-dave": {
+          "type": "review",
+          "settings": {
+            "name": "Dave",
+            "age": "27",
+            "rating": "4.5",
+            "text": "The effect is subtle, but I notice it most when I’m not taking it. It’s one of those things where I didn’t realize how much of a difference it was making until I stopped for a few days and felt like something was missing.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-brooke": {
+          "type": "review",
+          "settings": {
+            "name": "Brooke",
+            "age": "33",
+            "rating": "5",
+            "text": "I used to feel like I needed another coffee whenever my energy dipped during the day. Since adding this to my routine, I’ve found myself reaching for that extra cup a lot less, which has been nice for my energy and my wallet.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-rob": {
+          "type": "review",
+          "settings": {
+            "name": "Rob",
+            "age": "51",
+            "rating": "5",
+            "text": "What I like most is that the energy doesn’t feel like the quick boost I get from caffeine. For me, it feels more gradual and steady without that overly wired or jittery feeling I sometimes get after too much coffee.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-jacob": {
+          "type": "review",
+          "settings": {
+            "name": "Jacob",
+            "age": "39",
+            "rating": "5",
+            "text": "I’ve noticed my mornings don’t feel quite as sluggish anymore. I still enjoy my coffee, but it feels more like something I drink because I want it rather than something I absolutely need to get myself going.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-james": {
+          "type": "review",
+          "settings": {
+            "name": "James",
+            "age": "33",
+            "rating": "4.5",
+            "text": "The biggest difference for me isn’t some huge burst of energy, it’s how steady I feel. Instead of constantly looking for coffee or something sweet to pick me back up, I feel like my energy carries me through more of the day naturally.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        }
+      },
+      "block_order": [
+        "rv-jim",
+        "rv-deborah",
+        "rv-jane",
+        "rv-ronald",
+        "rv-dave",
+        "rv-brooke",
+        "rv-rob",
+        "rv-jacob",
+        "rv-james"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q-1": {
+          "type": "question",
+          "settings": {
+            "question": "What is NAD+ and why is it important?",
+            "answer": "<p>NAD+ (nicotinamide adenine dinucleotide) is a coenzyme naturally found in every living cell in your body. It plays an essential role in converting nutrients into energy, supporting cellular metabolism and helping maintain healthy cellular function. NAD+ is also involved in DNA repair.</p>",
+            "open": true
+          }
+        },
+        "q-2": {
+          "type": "question",
+          "settings": {
+            "question": "What are the benefits of NAD+ supplements?",
+            "answer": "<p>NAD+ supplements are attracting interest for their potential role in cellular energy and healthy aging. Research into NAD+ and its precursors is growing, with encouraging findings in laboratory studies and certain human trials. However, scientists are still investigating how supplementation affects everyday energy, physical performance and long-term health.</p>",
+            "open": false
+          }
+        },
+        "q-4": {
+          "type": "question",
+          "settings": {
+            "question": "How long does it take to notice results?",
+            "answer": "<p>Everyone's experience may be different. Some people may notice no obvious changes at all, even if certain biological markers change. Research into NAD+ precursors has demonstrated measurable changes in NAD-related levels over weeks, but there is no established timeline for noticeable improvements in energy or well-being.</p>",
+            "open": false
+          }
+        },
+        "q-5": {
+          "type": "question",
+          "settings": {
+            "question": "Is NAD+ suitable for everyday use?",
+            "answer": "<p>Several human studies of NAD+ precursors have reported generally good tolerability over weeks to months. However, long-term safety information remains limited, and the findings depend on the specific ingredient and dose. Always follow the product's directions, and consult a healthcare professional if you're pregnant, breastfeeding, taking medication or managing a medical condition.</p>",
+            "open": false
+          }
+        },
+        "q-6": {
+          "type": "question",
+          "settings": {
+            "question": "How many capsules come in each bottle?",
+            "answer": "<p>Each bottle contains 30 capsules, designed to fit conveniently into your daily routine. Please refer to the product's recommended serving size and directions for use.</p>",
+            "open": false
+          }
+        },
+        "q-7": {
+          "type": "question",
+          "settings": {
+            "question": "Can I combine NAD+ with my other supplements?",
+            "answer": "<p>Your supplement routine should work for your individual needs. Check the full ingredient list to avoid taking overlapping ingredients, especially if you already use other NAD+ or vitamin B3 products. Your pharmacist or healthcare professional can help identify potential interactions with medications or other supplements.</p>",
+            "open": false
+          }
+        },
+        "q-resveratrol-pair": {
+          "type": "question",
+          "settings": {
+            "question": "Why is resveratrol paired with NAD+?",
+            "answer": "<p>Resveratrol has been studied for how it interacts with sirtuins, a family of proteins that depend on NAD+ to work. That connection is why the two are often taken together.</p>",
+            "open": false
+          }
+        },
+        "q-resveratrol-what": {
+          "type": "question",
+          "settings": {
+            "question": "What is resveratrol?",
+            "answer": "<p>Resveratrol is a natural compound found in grape skins, red wine, peanuts and some berries. It's a polyphenol, a type of antioxidant that plants produce to protect themselves.</p>",
+            "open": false
+          }
+        },
+        "q-resveratrol-safe": {
+          "type": "question",
+          "settings": {
+            "question": "Is resveratrol safe to take every day?",
+            "answer": "<p>In human studies, resveratrol has generally been well tolerated at common supplement doses, though higher doses have been linked to stomach upset in some people.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "q-1",
+        "q-2",
+        "q-4",
+        "q-5",
+        "q-6",
+        "q-7",
+        "q-resveratrol-what",
+        "q-resveratrol-pair",
+        "q-resveratrol-safe"
+      ],
+      "settings": {}
+    },
+    "final": {
+      "type": "final-cta",
+      "settings": {}
+    },
+    "results": {
+      "type": "day-slots",
+      "blocks": {
+        "good-1": {
+          "type": "slot",
+          "settings": {
+            "time": "7:00",
+            "period": "AM",
+            "level": 90,
+            "text": "Mornings feel less sluggish.",
+            "highlight": false
+          }
+        },
+        "good-2": {
+          "type": "slot",
+          "settings": {
+            "time": "1:15",
+            "period": "PM",
+            "level": 80,
+            "text": "Reaching for that second coffee less often.",
+            "highlight": false
+          }
+        },
+        "good-3": {
+          "type": "slot",
+          "settings": {
+            "time": "3:07",
+            "period": "PM",
+            "level": 75,
+            "text": "Getting through the afternoon without hitting the same wall.",
+            "highlight": true
+          }
+        },
+        "good-4": {
+          "type": "slot",
+          "settings": {
+            "time": "9:40",
+            "period": "PM",
+            "level": 70,
+            "text": "No wired, jittery feeling from extra coffee.",
+            "highlight": false
+          }
+        }
+      },
+      "block_order": [
+        "good-1",
+        "good-2",
+        "good-3",
+        "good-4"
+      ],
+      "settings": {
+        "kicker": "With MyNrg",
+        "heading": "What test-launch customers told us changed.",
+        "note": "Based on what customers in our July 2026 test launch told us. Bars are illustrative. Everyone responds differently, and some people notice no obvious change.",
+        "sand": false,
+        "tone": "green",
+        "anchor_id": "results"
+      }
     }
   },
   "order": [
     "hero",
-    "featured_collection"
+    "strip",
+    "why",
+    "problem",
+    "results",
+    "how",
+    "promise",
+    "shop",
+    "compare",
+    "science",
+    "safety",
+    "reviews",
+    "faq",
+    "final"
   ]
 }

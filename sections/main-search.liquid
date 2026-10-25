@@ -1,39 +1,37 @@
-<section class="page-width section" {{ section.shopify_attributes }}>
-  <h1>Search</h1>
-  <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
-    <label class="visually-hidden" for="SearchInput">Search products</label>
-    <input id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search products">
-    <input type="hidden" name="type" value="product">
-    <button class="button" type="submit">Search</button>
-  </form>
-  {% if search.performed %}
-    <h2>Results for “{{ search.terms | escape }}”</h2>
-    {% paginate search.results by 12 %}
-      {% if search.results_count > 0 %}
-        <div class="product-grid">
-          {% for result in search.results %}
-            {% if result.object_type == 'product' %}
-              {% render 'product-card', product: result %}
-            {% endif %}
-          {% endfor %}
+<section class="page-head">
+  <div class="wrap">
+    <h1 class="h1 h1--page">Search</h1>
+    <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="SearchInput">Search</label>
+      <input class="field" id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search">
+      <button class="btn btn--blue" type="submit">Search</button>
+    </form>
+  </div>
+</section>
+<section class="sec" style="padding-top:8px">
+  <div class="wrap">
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <div class="pgrid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {% render 'product-card', card_product: item %}
+            {%- else -%}
+              <a class="pcard" href="{{ item.url }}"><span class="pcard__title">{{ item.title | escape }}</span></a>
+            {%- endif -%}
+          {%- endfor -%}
         </div>
-      {% else %}
-        <p>No products found.</p>
-      {% endif %}
-      {% if paginate.pages > 1 %}
-        <nav class="pagination" aria-label="Pagination">
-          {% if paginate.previous %}<a href="{{ paginate.previous.url }}">Previous</a>{% endif %}
-          <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
-          {% if paginate.next %}<a href="{{ paginate.next.url }}">Next</a>{% endif %}
-        </nav>
-      {% endif %}
-    {% endpaginate %}
-  {% endif %}
+      {%- else -%}
+        <p class="lede">No results for "{{ search.terms | escape }}".</p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
 </section>
 
 {% schema %}
 {
   "name": "Search",
+  "tag": "div",
   "settings": []
 }
 {% endschema %}

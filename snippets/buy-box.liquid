@@ -1,0 +1,215 @@
+{%- comment -%}
+  Product gallery + buy box. Used by main-product and featured-product.
+  Params: product, section, heading_tag ('h1' or 'h2')
+
+  Pack cards come from the product's variants. Days per pack is read from the
+  first number in the variant name ("2 bottles" = 2 x days per bottle), or from
+  an optional variant metafield custom.days_supply (integer).
+  Optional variant metafields: custom.pack_badge (text), custom.pack_note (text).
+  Subscription prices come from the product's selling plans (Shopify Subscriptions app).
+{%- endcomment -%}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign days_per = section.settings.days_per_bottle | default: 30
+  assign anchor = section.settings.anchor_id | default: 'shop'
+  assign tag = heading_tag | default: 'h2'
+
+  assign has_plans = false
+  if product.selling_plan_groups.size > 0
+    assign has_plans = true
+  endif
+
+  assign best_ppd = 999999999
+  assign best_id = 0
+  for v in product.variants
+    assign bottles = v.option1 | split: ' ' | first | plus: 0
+    if bottles < 1
+      assign bottles = 1
+    endif
+    assign vdays = v.metafields.custom.days_supply.value | default: 0
+    if vdays == 0
+      assign vdays = bottles | times: days_per
+    endif
+    assign ppd = v.price | divided_by: vdays
+    if ppd < best_ppd
+      assign best_ppd = ppd
+      assign best_id = v.id
+    endif
+  endfor
+
+  assign first_alloc = current_variant.selling_plan_allocations | first
+  assign save_pct = 0
+  if first_alloc and current_variant.price > 0
+    assign save_pct = current_variant.price | minus: first_alloc.price | times: 100 | divided_by: current_variant.price
+  endif
+-%}
+
+<div class="wrap shop">
+  <div class="gallery" data-gallery>
+    <div class="photo gallery__main">
+      {%- if product.media.size > 0 -%}
+        {%- for media in product.media limit: 6 -%}
+          {%- assign media_alt = media.alt | default: product.title -%}
+          <div data-slide="{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
+            {{ media.preview_image | image_url: width: 1400 | image_tag: alt: media_alt, widths: '600, 900, 1200, 1400', sizes: '(min-width: 861px) 55vw, 100vw', loading: 'lazy' }}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div data-slide="0">
+          <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="1400" height="1400" loading="lazy">
+        </div>
+      {%- endif -%}
+    </div>
+    {%- if product.media.size > 1 -%}
+      <div class="gallery__thumbs">
+        {%- for media in product.media limit: 6 -%}
+          <button class="gallery__thumb{% if forloop.first %} is-active{% endif %}" type="button" data-thumb="{{ forloop.index0 }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Show image {{ forloop.index }}">
+            {{ media.preview_image | image_url: width: 240 | image_tag: alt: '', loading: 'lazy' }}
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- form 'product', product, class: 'buy', data-buy-form: '', data-currency: cart.currency.iso_code, data-locale: request.locale.iso_code -%}
+    {%- if section.settings.kicker != blank -%}
+      <p class="buy__badge">{{ section.settings.kicker | escape }}</p>
+    {%- endif -%}
+    <{{ tag }} class="buy__title">{{ product.title | escape }}</{{ tag }}>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="buy__sub">{{ section.settings.subtitle | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.bullets != blank -%}
+      {%- assign lines = section.settings.bullets | newline_to_br | split: '<br />' -%}
+      <ul class="buy__bullets">
+        {%- for line in lines -%}
+          {%- assign clean = line | strip -%}
+          {%- if clean != blank -%}
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>{{ clean | escape }}</span></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+    {%- if has_plans -%}
+      <input type="hidden" name="selling_plan" value="{% if product.requires_selling_plan and first_alloc %}{{ first_alloc.selling_plan.id }}{% endif %}"{% unless product.requires_selling_plan %} disabled{% endunless %}>
+      <fieldset class="fieldset">
+        <legend>{{ section.settings.purchase_label | escape }}</legend>
+        <div class="ptype">
+          {%- unless product.requires_selling_plan -%}
+            <label><input type="radio" name="purchase_type" value="once" checked>{{ section.settings.once_label | escape }}</label>
+          {%- endunless -%}
+          <label><input type="radio" name="purchase_type" value="sub"{% if product.requires_selling_plan %} checked{% endif %}>{{ section.settings.sub_label | escape }}{% if save_pct > 0 %} <span class="save">Save {{ save_pct }}%</span>{% endif %}</label>
+        </div>
+        <p class="ptype__note" data-once-terms{% if product.requires_selling_plan %} hidden{% endif %}>{{ section.settings.once_note | escape }}</p>
+        <p class="ptype__note" data-sub-terms{% unless product.requires_selling_plan %} hidden{% endunless %}>{{ section.settings.sub_note | escape }}</p>
+      </fieldset>
+    {%- endif -%}
+
+    <fieldset class="fieldset">
+      <legend>{{ section.settings.pack_label | escape }}</legend>
+      <div class="packs">
+        {%- for v in product.variants -%}
+          {%- liquid
+            assign bottles = v.option1 | split: ' ' | first | plus: 0
+            if bottles < 1
+              assign bottles = 1
+            endif
+            assign vdays = v.metafields.custom.days_supply.value | default: 0
+            if vdays == 0
+              assign vdays = bottles | times: days_per
+            endif
+            assign alloc = v.selling_plan_allocations | first
+            assign badge = v.metafields.custom.pack_badge.value
+            if badge == blank and product.variants.size > 1 and v.id == best_id
+              assign badge = section.settings.best_badge
+            endif
+            assign note = v.metafields.custom.pack_note.value
+            if note == blank
+              assign note = vdays | append: '-day supply'
+            endif
+            assign vname = v.title
+            if product.has_only_default_variant
+              assign vname = section.settings.single_label
+            endif
+          -%}
+          <label class="pack">
+            {%- if badge != blank -%}<span class="pack__flag">{{ badge | escape }}</span>{%- endif -%}
+            <input type="radio" name="pack" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} data-variant-id="{{ v.id }}" data-label="{{ vname | escape }}" data-price="{{ v.price }}"{% if alloc %} data-sub-price="{{ alloc.price }}" data-selling-plan="{{ alloc.selling_plan.id }}"{% endif %} data-days="{{ vdays }}">
+            <span class="pack__radio" aria-hidden="true"></span>
+            <span>
+              <span class="pack__name">{{ vname | escape }}</span>
+              <span class="pack__note">{% if v.available %}{{ note | escape }}{% else %}Sold out{% endif %}</span>
+            </span>
+            <span class="pack__price">
+              <s data-pack-compare hidden>{{ v.price | money }}</s>
+              <strong data-pack-price>{{ v.price | money }}</strong>
+              <span data-pack-perday>{{ v.price | divided_by: vdays | money }}/day</span>
+            </span>
+          </label>
+        {%- endfor -%}
+      </div>
+    </fieldset>
+
+    <div class="atc">
+      <button class="btn btn--blue btn--lg btn--block" type="submit" name="add"{% unless current_variant.available %} disabled{% endunless %}>
+        <span data-atc-label>{% if current_variant.available %}Add to cart · {{ current_variant.price | money }}{% else %}Sold out{% endif %}</span>
+      </button>
+      {%- if section.settings.terms != blank -%}
+        <p class="atc__terms">{{ section.settings.terms | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.assure_1 != blank or section.settings.assure_2 != blank or section.settings.assure_3 != blank -%}
+      <ul class="assure">
+        {%- if section.settings.assure_1 != blank -%}<li><svg aria-hidden="true"><use href="#i-free"/></svg>{{ section.settings.assure_1 | escape }}</li>{%- endif -%}
+        {%- if section.settings.assure_2 != blank -%}<li><svg aria-hidden="true"><use href="#i-cancel"/></svg>{{ section.settings.assure_2 | escape }}</li>{%- endif -%}
+        {%- if section.settings.assure_3 != blank -%}<li><svg aria-hidden="true"><use href="#i-shield"/></svg>{{ section.settings.assure_3 | escape }}</li>{%- endif -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="drawers">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'drawer' -%}
+              {%- if block.settings.content != blank -%}
+              <details class="drawer" {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.title | escape }}</summary>
+                <div class="drawer__body">{{ block.settings.content }}</div>
+              </details>
+              {%- endif -%}
+            {%- when 'description' -%}
+              {%- if product.description != blank -%}
+                <details class="drawer" {{ block.shopify_attributes }}>
+                  <summary>{{ block.settings.title | escape }}</summary>
+                  <div class="drawer__body rte">{{ product.description }}</div>
+                </details>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="fine" style="margin-top:18px">{{ section.settings.disclaimer | escape }}</p>
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+{%- if section.settings.show_sticky -%}
+  <div class="sticky-buy{% if section.settings.sticky_desktop %} sticky-buy--desktop{% endif %}" data-sticky-buy>
+    <div class="sticky-buy__thumb">
+      {%- if product.featured_media -%}
+        {{ product.featured_media.preview_image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy' }}
+      {%- else -%}
+        <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="" width="44" height="44" loading="lazy">
+      {%- endif -%}
+    </div>
+    <div class="sticky-buy__txt"><strong>{{ product.title | escape }}</strong><span data-sticky-price>{{ current_variant.price | money }}</span></div>
+    <a class="btn btn--white" href="#{{ anchor }}">{{ section.settings.sticky_label | escape }}</a>
+  </div>
+{%- endif -%}

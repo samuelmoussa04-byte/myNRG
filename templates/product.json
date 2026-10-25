@@ -1,10 +1,301 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
-      "type": "main-product"
+      "type": "main-product",
+      "blocks": {
+        "drawer-facts": {
+          "type": "drawer",
+          "settings": {
+            "title": "Supplement Facts"
+          }
+        },
+        "drawer-howto": {
+          "type": "drawer",
+          "settings": {
+            "title": "How to take it",
+            "content": "<p>Take one capsule a day with breakfast, before 10am.</p>"
+          }
+        },
+        "drawer-shipping": {
+          "type": "drawer",
+          "settings": {
+            "title": "Shipping",
+            "content": "<p>We ship to the United States and Canada. Delivery times and rates are shown at checkout.</p>"
+          }
+        },
+        "drawer-subs": {
+          "type": "drawer",
+          "settings": {
+            "title": "Subscriptions and cancelling",
+            "content": "<p>Subscribing is optional. If you do, open your account, go to Subscriptions and press Cancel. No phone call and no email.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "drawer-facts",
+        "drawer-howto",
+        "drawer-shipping",
+        "drawer-subs"
+      ],
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "note": "Reviews from customers in our July 2026 test launch."
+      },
+      "blocks": {
+        "rv-jim": {
+          "type": "review",
+          "settings": {
+            "name": "Jim",
+            "age": "44",
+            "rating": "5",
+            "text": "I’ve noticed more consistent energy throughout the day since I started taking it. I don’t necessarily feel a huge rush of energy, but I feel more steady and able to keep going without getting as tired.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-deborah": {
+          "type": "review",
+          "settings": {
+            "name": "Deborah",
+            "age": "39",
+            "rating": "5",
+            "text": "One of the biggest differences for me has been less of an afternoon crash. I used to really feel my energy drop later in the day, but now I feel like I can get through the afternoon without hitting that same wall.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-jane": {
+          "type": "review",
+          "settings": {
+            "name": "Jane",
+            "age": "47",
+            "rating": "5",
+            "text": "I feel a little sharper mentally and more switched on throughout the day. It’s not an overwhelming change, but I’ve noticed that focusing and staying on task seems to come a little easier.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-ronald": {
+          "type": "review",
+          "settings": {
+            "name": "Ronald",
+            "age": "29",
+            "rating": "4.5",
+            "text": "My workouts have been feeling better since I started taking it. I feel like I have more consistent energy during my sessions and don’t feel as drained toward the end.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-dave": {
+          "type": "review",
+          "settings": {
+            "name": "Dave",
+            "age": "27",
+            "rating": "4.5",
+            "text": "The effect is subtle, but I notice it most when I’m not taking it. It’s one of those things where I didn’t realize how much of a difference it was making until I stopped for a few days and felt like something was missing.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-brooke": {
+          "type": "review",
+          "settings": {
+            "name": "Brooke",
+            "age": "33",
+            "rating": "5",
+            "text": "I used to feel like I needed another coffee whenever my energy dipped during the day. Since adding this to my routine, I’ve found myself reaching for that extra cup a lot less, which has been nice for my energy and my wallet.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-rob": {
+          "type": "review",
+          "settings": {
+            "name": "Rob",
+            "age": "51",
+            "rating": "5",
+            "text": "What I like most is that the energy doesn’t feel like the quick boost I get from caffeine. For me, it feels more gradual and steady without that overly wired or jittery feeling I sometimes get after too much coffee.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-jacob": {
+          "type": "review",
+          "settings": {
+            "name": "Jacob",
+            "age": "39",
+            "rating": "5",
+            "text": "I’ve noticed my mornings don’t feel quite as sluggish anymore. I still enjoy my coffee, but it feels more like something I drink because I want it rather than something I absolutely need to get myself going.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        },
+        "rv-james": {
+          "type": "review",
+          "settings": {
+            "name": "James",
+            "age": "33",
+            "rating": "4.5",
+            "text": "The biggest difference for me isn’t some huge burst of energy, it’s how steady I feel. Instead of constantly looking for coffee or something sweet to pick me back up, I feel like my energy carries me through more of the day naturally.",
+            "date": "Test launch · July 2026",
+            "badge": ""
+          }
+        }
+      },
+      "block_order": [
+        "rv-jim",
+        "rv-deborah",
+        "rv-jane",
+        "rv-ronald",
+        "rv-dave",
+        "rv-brooke",
+        "rv-rob",
+        "rv-jacob",
+        "rv-james"
+      ]
+    },
+    "how": {
+      "type": "how-it-works",
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "title": "Your cells run on NAD+",
+            "text": "NAD+ is a coenzyme found in every cell. Your cells use it to turn food into usable energy.",
+            "highlight": false
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "title": "Levels drop as you age",
+            "text": "Studies in people show lower NAD+ in older adults. Researchers point to an enzyme called CD38, which uses up more NAD+ as inflammation rises.",
+            "highlight": false
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "title": "MyNrg supports your levels, daily",
+            "text": "One morning routine that supports healthy NAD+ levels and cellular energy.* Sleep, movement and less inflammation help too.",
+            "highlight": true
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3"
+      ],
+      "settings": {}
+    },
+    "science": {
+      "type": "science",
+      "blocks": {
+        "study-1": {
+          "type": "study",
+          "settings": {
+            "tag": "Studied in people",
+            "title": "NAD+ is lower as we age.",
+            "text": "When researchers measured NAD+ in adults of different ages, older people had lower levels, in both blood and skin.",
+            "source_1": "Clement et al., Rejuvenation Research, 2019",
+            "source_1_url": "https://pubmed.ncbi.nlm.nih.gov/30124109/",
+            "source_2": "Massudi et al., PLoS One, 2012",
+            "source_2_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0042357"
+          }
+        },
+        "study-2": {
+          "type": "study",
+          "settings": {
+            "tag": "Studied in people",
+            "title": "Precursors raise NAD+ in people.",
+            "text": "In randomized, placebo-controlled trials, healthy adults who took NAD+ precursors had higher NAD+ levels in their blood than those who took a placebo. These studies tested NMN and NR, not NAD+ taken directly.",
+            "source_1": "Martens et al., Nature Communications, 2018",
+            "source_1_url": "https://www.nature.com/articles/s41467-018-03421-7",
+            "source_2": "Yi et al., GeroScience, 2023",
+            "source_2_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9735188/"
+          }
+        }
+      },
+      "block_order": [
+        "study-1",
+        "study-2"
+      ],
+      "settings": {
+        "text": "The short version: NAD+ is lower in older adults, and in human trials, the NAD+ precursors NMN and NR raised it."
+      }
+    },
+    "compare": {
+      "type": "compare-table",
+      "blocks": {
+        "row-1": {
+          "type": "row",
+          "settings": {
+            "label": "No needles",
+            "c1": "yes",
+            "c2": "no",
+            "c3": "no"
+          }
+        },
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "label": "No appointment or prescription",
+            "c1": "yes",
+            "c2": "no",
+            "c3": "no"
+          }
+        },
+        "row-3": {
+          "type": "row",
+          "settings": {
+            "label": "Taken at home",
+            "c1": "yes",
+            "c2": "no",
+            "c3": "yes"
+          }
+        },
+        "row-4": {
+          "type": "row",
+          "settings": {
+            "label": "Typical cost",
+            "c1": "From {price} per bottle",
+            "c2": "$429–$879 per session",
+            "c3": "$99–$249 per month"
+          }
+        }
+      },
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4"
+      ],
+      "settings": {}
+    },
+    "safety": {
+      "type": "safety-note",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "reviews",
+    "how",
+    "science",
+    "compare",
+    "safety"
   ]
 }

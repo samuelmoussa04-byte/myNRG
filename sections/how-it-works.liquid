@@ -1,0 +1,100 @@
+<section class="sec"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | escape }}"{% endif %}>
+  <div class="wrap">
+    <div class="sec-head">
+      {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+      <h2 class="h2">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="how">
+      {%- if section.settings.show_chart -%}
+        <figure class="chart" style="margin:0">
+          <div class="chart__head"><h3>{{ section.settings.chart_title | escape }}</h3><span>Illustrative</span></div>
+          <svg viewBox="0 0 560 300" style="color: var(--cobalt)" role="img" aria-label="Illustrative chart: NAD+ levels are high at age 20 and fall steadily through age 70.">
+            <defs>
+              <linearGradient id="mynrg-area-{{ section.id }}" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="currentColor" stop-opacity=".22"/>
+                <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g stroke="#E9E6DE" stroke-width="1">
+              <line x1="60" x2="540" y1="40" y2="40"/>
+              <line x1="60" x2="540" y1="110" y2="110"/>
+              <line x1="60" x2="540" y1="180" y2="180"/>
+            </g>
+            <line x1="60" x2="540" y1="250" y2="250" stroke="#D8D4C9" stroke-width="1.5"/>
+            <text x="0" y="46" fill="#868A93" style="font-family:'Figtree',sans-serif;font-size:13px;font-weight:600">Higher</text>
+            <text x="0" y="254" fill="#868A93" style="font-family:'Figtree',sans-serif;font-size:13px;font-weight:600">Lower</text>
+            <g style="color: var(--cobalt)">
+              <path d="M60 62 C100 72 200 118 252 140 S390 190 444 198 S520 212 540 214 L540 250 L60 250 Z" fill="url(#mynrg-area-{{ section.id }})"/>
+              <path d="M60 62 C100 72 200 118 252 140 S390 190 444 198 S520 212 540 214" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="108" x2="108" y1="80" y2="250" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="4 5"/>
+              <line x1="300" x2="300" y1="158" y2="250" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="4 5"/>
+              <circle cx="108" cy="80" r="7" fill="currentColor" stroke="#FFFFFF" stroke-width="3"/>
+              <circle cx="300" cy="158" r="7" fill="currentColor" stroke="#FFFFFF" stroke-width="3"/>
+            </g>
+            <g style="font-family:'Figtree',sans-serif;font-size:13px" fill="#868A93" text-anchor="middle">
+              <text x="60" y="276">20</text><text x="156" y="276">30</text><text x="252" y="276">40</text><text x="348" y="276">50</text><text x="444" y="276">60</text><text x="540" y="276">70</text>
+              <text x="540" y="296" text-anchor="end" style="font-weight:600">Age</text>
+            </g>
+            <g style="font-family:'Figtree',sans-serif;font-size:14px;font-weight:700">
+              <rect x="80" y="38" width="56" height="26" rx="13" fill="#111214"/>
+              <text x="108" y="56" text-anchor="middle" fill="#FFFFFF">At 25</text>
+              <rect x="272" y="116" width="56" height="26" rx="13" fill="#111214"/>
+              <text x="300" y="134" text-anchor="middle" fill="#FFFFFF">At 45</text>
+            </g>
+          </svg>
+          {%- if section.settings.chart_note != blank -%}
+            <figcaption class="chart__note">{{ section.settings.chart_note | escape }}{% if section.settings.chart_link_label != blank %} <a href="{{ section.settings.chart_link | default: '#science' }}">{{ section.settings.chart_link_label | escape }}</a>.{% endif %}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endif -%}
+      <ol class="steps">
+        {%- for block in section.blocks -%}
+          <li{% if block.settings.highlight %} class="is-us"{% endif %} {{ block.shopify_attributes }}>
+            <span class="steps__n">{{ forloop.index }}</span>
+            <div><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.text | escape }}</p></div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How it works",
+  "tag": "div",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Small label", "default": "How it works" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "NAD+, explained in 30 seconds." },
+    { "type": "checkbox", "id": "show_chart", "label": "Show chart", "default": true },
+    { "type": "text", "id": "chart_title", "label": "Chart title", "default": "NAD+ levels with age" },
+    { "type": "text", "id": "chart_note", "label": "Chart note", "default": "Illustrative curve, not a measurement." },
+    { "type": "text", "id": "chart_link_label", "label": "Chart link label", "default": "See the research in people" },
+    { "type": "text", "id": "chart_link", "label": "Chart link", "default": "#science" },
+    { "type": "text", "id": "anchor_id", "label": "Section ID (optional)", "default": "how" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Your cells run on NAD+" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "NAD+ is a coenzyme found in every cell. Your cells use it to turn food into usable energy." },
+        { "type": "checkbox", "id": "highlight", "label": "Highlight (brand color number)", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How it works",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Your cells run on NAD+", "text": "NAD+ is a coenzyme found in every cell. Your cells use it to turn food into usable energy." } },
+        { "type": "step", "settings": { "title": "Levels drop as you age", "text": "Studies in people show lower NAD+ in older adults. Researchers point to an enzyme called CD38, which uses up more NAD+ as inflammation rises." } },
+        { "type": "step", "settings": { "title": "MyNrg supports your levels, daily", "text": "One morning routine that supports healthy NAD+ levels and cellular energy.* Sleep, movement and less inflammation help too.", "highlight": true } }
+      ]
+    }
+  ],
+  "disabled_on": { "groups": ["header", "footer"] }
+}
+{% endschema %}

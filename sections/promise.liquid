@@ -1,0 +1,20 @@
+<section class="sec sec--tight promise">
+  <div class="wrap">
+    <p class="promise__q">{{ section.settings.text | escape }}{% if section.settings.text_accent != blank %} <span>{{ section.settings.text_accent | escape }}</span>{% endif %}</p>
+    {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext | escape }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Big statement",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Statement", "default": "You won't feel 20 again." },
+    { "type": "text", "id": "text_accent", "label": "Statement, colored part", "default": "You might feel more like yourself at 3pm." },
+    { "type": "textarea", "id": "subtext", "label": "Text under", "default": "That's the honest version. Supplements in this category have been oversold for years, and we'd rather promise less." }
+  ],
+  "presets": [ { "name": "Big statement" } ],
+  "disabled_on": { "groups": ["header", "footer"] }
+}
+{% endschema %}

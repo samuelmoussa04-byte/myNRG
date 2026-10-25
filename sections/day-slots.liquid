@@ -1,0 +1,59 @@
+<section class="sec{% if section.settings.sand %} sec--sand{% endif %}"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | escape }}"{% endif %}>
+  <div class="wrap">
+    <div class="sec-head">
+      {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+      <h2 class="h2">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="day{% if section.settings.tone == 'green' %} day--good{% endif %}">
+      {%- for block in section.blocks -%}
+        <article class="slot{% if block.settings.highlight %} slot--low{% endif %}" {{ block.shopify_attributes }}>
+          <div class="slot__time">{{ block.settings.time | escape }} <small>{{ block.settings.period }}</small></div>
+          <div class="slot__bar" aria-hidden="true"><i style="width:{{ block.settings.level }}%"></i></div>
+          <p>{{ block.settings.text | escape }}</p>
+        </article>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.note != blank -%}<p class="day-note">{{ section.settings.note | escape }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Day timeline",
+  "tag": "div",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Small label", "default": "Sound familiar?" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your bloodwork is normal. You still feel like this." },
+    { "type": "textarea", "id": "note", "label": "Note under the cards", "default": "A standard blood test won't show it. One part of the picture researchers point to is NAD+, a coenzyme that falls as we age." },
+    { "type": "checkbox", "id": "sand", "label": "Beige background", "default": true },
+    { "type": "select", "id": "tone", "label": "Bar color", "default": "brand", "options": [ { "value": "brand", "label": "Brand blue" }, { "value": "green", "label": "Green (results)" } ] },
+    { "type": "text", "id": "anchor_id", "label": "Section ID (optional)", "default": "problem" }
+  ],
+  "blocks": [
+    {
+      "type": "slot",
+      "name": "Time card",
+      "settings": [
+        { "type": "text", "id": "time", "label": "Time", "default": "3:07" },
+        { "type": "select", "id": "period", "label": "AM / PM", "default": "PM", "options": [ { "value": "AM", "label": "AM" }, { "value": "PM", "label": "PM" } ] },
+        { "type": "range", "id": "level", "label": "Energy bar", "min": 5, "max": 100, "step": 5, "unit": "%", "default": 25 },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Reading the same email for the fourth time." },
+        { "type": "checkbox", "id": "highlight", "label": "Highlight this card", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Day timeline",
+      "blocks": [
+        { "type": "slot", "settings": { "time": "7:00", "period": "AM", "level": 85, "text": "Up before the alarm. Feeling fine." } },
+        { "type": "slot", "settings": { "time": "1:15", "period": "PM", "level": 55, "text": "Second coffee. It used to fix the afternoon." } },
+        { "type": "slot", "settings": { "time": "3:07", "period": "PM", "level": 20, "text": "Reading the same email for the fourth time.", "highlight": true } },
+        { "type": "slot", "settings": { "time": "9:40", "period": "PM", "level": 35, "text": "Too tired to do anything. Not tired enough to sleep." } }
+      ]
+    }
+  ],
+  "disabled_on": { "groups": ["header", "footer"] }
+}
+{% endschema %}

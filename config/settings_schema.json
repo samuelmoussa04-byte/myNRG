@@ -1,33 +1,28 @@
 [
   {
-    "name": "Theme information",
-    "theme_name": "Storefront Starter",
-    "theme_version": "1.0.0",
-    "theme_author": "Store owner",
-    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
-    "theme_support_url": "https://help.shopify.com/"
+    "name": "theme_info",
+    "theme_name": "MyNrg",
+    "theme_version": "1.1.0",
+    "theme_author": "MyNrg",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_email": "MyNrgSupport@gmail.com"
   },
   {
     "name": "Colors",
     "settings": [
-      {
-        "type": "color",
-        "id": "accent_color",
-        "label": "Accent color",
-        "default": "#315c46"
-      },
-      {
-        "type": "color",
-        "id": "background_color",
-        "label": "Background color",
-        "default": "#ffffff"
-      },
-      {
-        "type": "color",
-        "id": "text_color",
-        "label": "Text color",
-        "default": "#1b1b1b"
-      }
+      { "type": "color", "id": "color_paper", "label": "Page background", "default": "#FCFAF6" },
+      { "type": "color", "id": "color_sand", "label": "Beige section background", "default": "#F5F3ED" },
+      { "type": "color", "id": "color_ink", "label": "Text", "default": "#111214" },
+      { "type": "color", "id": "color_brand", "label": "Brand color", "info": "Buttons, links and highlights.", "default": "#1F4690" },
+      { "type": "color", "id": "color_brand_deep", "label": "Brand color, dark", "info": "Dark highlight cards.", "default": "#12285A" }
+    ]
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "text", "id": "support_email", "label": "Support email", "info": "Shown on the contact page, FAQ and footer.", "default": "MyNrgSupport@gmail.com" },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "Square image, at least 64 x 64 px." },
+      { "type": "image_picker", "id": "share_image", "label": "Social sharing image", "info": "Shown when your store link is shared." }
     ]
   }
 ]

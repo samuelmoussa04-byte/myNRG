@@ -1,0 +1,36 @@
+<section class="sec sec--tight">
+  <div class="wrap">
+    <div class="final">
+      <div class="final__copy">
+        <h2 class="h2">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.text != blank -%}<p class="lede">{{ section.settings.text | escape }}</p>{%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <div class="hero__cta"><a class="btn btn--white btn--lg" href="{{ section.settings.button_link | default: '#shop' }}">{{ section.settings.button_label | escape }}</a></div>
+        {%- endif -%}
+      </div>
+      <div class="final__img photo" style="border-radius:0">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 800, 1200', sizes: '(min-width: 861px) 45vw, 100vw' }}
+        {%- else -%}
+          <img src="{{ 'mynrg-front.jpg' | asset_url }}" alt="MyNrg NAD+ Resveratrol" width="1400" height="1400" loading="lazy">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Closing banner",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Try it for 30 days. Love it or get your money back." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "One morning routine before 10am. No subscription unless you want one." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop MyNrg" },
+    { "type": "text", "id": "button_link", "label": "Button link", "default": "#shop" },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "If empty, the built-in bottle photo is used." }
+  ],
+  "presets": [ { "name": "Closing banner" } ],
+  "disabled_on": { "groups": ["header", "footer"] }
+}
+{% endschema %}

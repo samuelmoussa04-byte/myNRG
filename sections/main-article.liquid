@@ -1,0 +1,22 @@
+<section class="page-head">
+  <div class="wrap">
+    <h1 class="h1 h1--page">{{ article.title | escape }}</h1>
+    <p class="article-meta">{{ article.published_at | date: '%B %-d, %Y' }}{% if article.author != blank %} · {{ article.author | escape }}{% endif %}</p>
+  </div>
+</section>
+<section class="sec" style="padding-top:8px">
+  <div class="wrap">
+    {%- if article.image -%}
+      <div class="article-img">{{ article.image | image_url: width: 1600 | image_tag: alt: article.title, widths: '800, 1200, 1600' }}</div>
+    {%- endif -%}
+    <div class="rte">{{ article.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Article",
+  "tag": "div",
+  "settings": []
+}
+{% endschema %}

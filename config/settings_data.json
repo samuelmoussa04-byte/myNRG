@@ -1,0 +1,48 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_paper": "#FCFAF6",
+    "color_sand": "#F5F3ED",
+    "color_ink": "#111214",
+    "color_brand": "#1F4690",
+    "color_brand_deep": "#12285A",
+    "support_email": "MyNrgSupport@gmail.com",
+    "content_for_index": []
+  },
+  "presets": {
+    "Default": {
+      "color_paper": "#FCFAF6",
+      "color_sand": "#F5F3ED",
+      "color_ink": "#111214",
+      "color_brand": "#1F4690",
+      "color_brand_deep": "#12285A",
+      "support_email": "MyNrgSupport@gmail.com"
+    }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".card {border-radius: 30px;}",
+      ".mn-contact {max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px;}",
+      ".mn-contact h2 {font-size: 30px; margin: 0 0 12px;}",
+      ".mn-contact__eyebrow {text-transform: uppercase; letter-spacing: 0.12em; font-size: 13px; color: #b8935a;}",
+      ".mn-contact__item {border-top: 1px solid #ddd8cf; padding: 16px 0;}",
+      ".mn-contact__item span {display: block; font-size: 13px; text-transform: uppercase; color: #888;}",
+      ".mn-contact__item p,.mn-contact__item a {margin: 0; color: #121110; font-weight: 500;}",
+      ".mn-contact__form {background: #fff; border-radius: 20px; padding: 32px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06); display: flex; flex-direction: column; gap: 16px;}",
+      ".mn-contact__form label {display: flex; flex-direction: column; gap: 6px; font-size: 14px;}",
+      ".mn-contact__form input,.mn-contact__form textarea {font: inherit; padding: 12px; border: 1px solid #ddd8cf; border-radius: 10px; background: #f7f5f1;}",
+      ".mn-contact__form input:focus,.mn-contact__form textarea:focus {outline: none; border-color: #b8935a;}",
+      ".mn-contact__form button {background: #121110; color: #fff; border: 0; border-radius: 10px; padding: 14px; font: inherit; font-weight: 600; cursor: pointer;}",
+      ".mn-contact__form button:hover {background: #b8935a;}",
+      "@media (max-width: 768px) {.mn-contact {grid-template-columns: 1fr; gap: 32px; }}"
+    ]
+  }
+}

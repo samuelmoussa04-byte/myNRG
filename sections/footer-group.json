@@ -1,0 +1,36 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "blurb": "MyNrg is a daily NAD+ and resveratrol supplement for the afternoon wall. Ships to the United States and Canada.",
+        "heading_1": "Shop",
+        "menu_1": "main-menu",
+        "heading_2": "Help",
+        "menu_2": "footer",
+        "heading_3": "Contact",
+        "contact_label": "Contact us",
+        "contact_link": "/pages/contact",
+        "show_wordmark": true,
+        "wordmark_1": "My",
+        "wordmark_2": "Nrg",
+        "disclaimer": "*This product is not intended to diagnose, treat, cure, or prevent any disease. Consult your healthcare provider before use if you are pregnant, nursing, taking medication (including blood thinners), or have a medical condition.",
+        "bottom_note": "Ships to the United States and Canada"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

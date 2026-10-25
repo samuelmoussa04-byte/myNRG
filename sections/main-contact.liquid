@@ -1,0 +1,132 @@
+{%- liquid
+  assign topics = section.settings.topics | split: ','
+  assign order_topics = section.settings.order_topics | split: ','
+  assign order_topics_joined = ''
+  for t in order_topics
+    assign clean = t | strip
+    if forloop.first
+      assign order_topics_joined = clean
+    else
+      assign order_topics_joined = order_topics_joined | append: '|' | append: clean
+    endif
+  endfor
+-%}
+<section class="page-head">
+  <div class="wrap">
+    {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+    <h1 class="h1 h1--page">{{ section.settings.heading | escape }}</h1>
+    {%- if section.settings.text != blank -%}<p class="lede">{{ section.settings.text | escape }}</p>{%- endif -%}
+  </div>
+</section>
+
+<section class="sec" style="padding-top:8px">
+  <div class="wrap contact">
+    <div class="form-card">
+      {%- form 'contact', id: 'ContactForm', data-contact-form: '', data-order-topics: order_topics_joined -%}
+        {%- if form.posted_successfully? -%}
+          <div class="form-success" role="status">
+            <div class="form-success__icon"><svg aria-hidden="true"><use href="#i-check"/></svg></div>
+            <h2 class="h3">{{ section.settings.success_heading | escape }}</h2>
+            <p>{{ section.settings.success_text | escape }}</p>
+            <a class="btn btn--line" href="{{ request.path }}">Send another message</a>
+          </div>
+        {%- else -%}
+          {%- if form.errors -%}
+            <div class="form-error" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+
+          <fieldset class="fieldset">
+            <legend>{{ section.settings.topic_label | escape }}</legend>
+            <div class="topics">
+              {%- for t in topics -%}
+                {%- assign topic = t | strip -%}
+                <label class="topic"><input type="radio" id="Topic-{{ forloop.index }}" name="contact[Topic]" value="{{ topic | escape }}"{% if forloop.first %} checked{% endif %}><span>{{ topic | escape }}</span></label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+
+          <div class="form-grid">
+            <div class="fld">
+              <label for="ContactForm-name">Name</label>
+              <input class="field" id="ContactForm-name" name="contact[name]" type="text" autocomplete="name" value="{{ form.name }}" required>
+            </div>
+            <div class="fld">
+              <label for="ContactForm-email">Email</label>
+              <input class="field" id="ContactForm-email" name="contact[email]" type="email" autocomplete="email" value="{{ form.email }}" required>
+            </div>
+            <div class="fld span-2">
+              <label for="ContactForm-order">Order number <span class="opt">(optional)</span></label>
+              <input class="field" id="ContactForm-order" name="contact[Order number]" type="text" placeholder="#1001" maxlength="30" autocomplete="off">
+              <p class="help">It's in your order confirmation email, starting with #.</p>
+              <p class="help help--hint" data-order-hint>Adding your order number helps us find your order faster.</p>
+            </div>
+            <div class="fld span-2">
+              <label for="ContactForm-body">Message</label>
+              <textarea class="field" id="ContactForm-body" name="contact[body]" rows="6" required placeholder="Tell us what's going on.">{{ form.body }}</textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn--blue btn--lg" type="submit">Send message</button>
+            {%- if section.settings.privacy_note != blank -%}<p class="help">{{ section.settings.privacy_note | escape }}</p>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+
+    <aside class="side">
+      <div class="side-card">
+        <h2 class="h3">{{ section.settings.side_heading | escape }}</h2>
+        {%- if settings.support_email != blank -%}
+          <div class="email-line">
+            <a class="email-addr" href="mailto:{{ settings.support_email }}">{{ settings.support_email | escape }}</a>
+            <button class="copy-btn" type="button" data-copy="{{ settings.support_email | escape }}">Copy</button>
+          </div>
+        {%- endif -%}
+        <dl class="side-list">
+          {%- if section.settings.reply_time != blank -%}<div><dt>Reply time</dt><dd>{{ section.settings.reply_time | escape }}</dd></div>{%- endif -%}
+          {%- if section.settings.refunds != blank -%}<div><dt>Refunds</dt><dd>{{ section.settings.refunds | escape }}</dd></div>{%- endif -%}
+          {%- if section.settings.ship_to != blank -%}<div><dt>We ship to</dt><dd>{{ section.settings.ship_to | escape }}</dd></div>{%- endif -%}
+        </dl>
+      </div>
+      {%- if section.settings.show_cancel_card -%}
+        <div class="side-card side-card--blue">
+          <h2 class="h3">{{ section.settings.cancel_heading | escape }}</h2>
+          <p>{{ section.settings.cancel_text | escape }}</p>
+          <a class="btn btn--white" href="{{ routes.account_url }}">{{ section.settings.cancel_button | escape }}</a>
+        </div>
+      {%- endif -%}
+    </aside>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "div",
+  "settings": [
+    { "type": "paragraph", "content": "Messages are emailed to your store's contact email (Settings > Store details). Set it to your support address." },
+    { "type": "text", "id": "kicker", "label": "Small label", "default": "Contact" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How can we help?" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Questions about an order, your subscription or the product? Send us a message and we'll reply by email within 24 hours, 7 days a week." },
+    { "type": "header", "content": "Form" },
+    { "type": "text", "id": "topic_label", "label": "Topic heading", "default": "What's this about?" },
+    { "type": "text", "id": "topics", "label": "Topics", "info": "Separate with commas.", "default": "An order, My subscription, Shipping, A refund, The product, Something else" },
+    { "type": "text", "id": "order_topics", "label": "Topics that show the order-number hint", "info": "Separate with commas.", "default": "An order, My subscription, Shipping, A refund" },
+    { "type": "text", "id": "privacy_note", "label": "Note under the button", "default": "We only use your details to reply to you." },
+    { "type": "text", "id": "success_heading", "label": "Success heading", "default": "Message sent." },
+    { "type": "text", "id": "success_text", "label": "Success text", "default": "Thanks for reaching out. We'll reply by email within 24 hours." },
+    { "type": "header", "content": "Side panel" },
+    { "type": "text", "id": "side_heading", "label": "Heading", "default": "Email us directly" },
+    { "type": "paragraph", "content": "The email address comes from Theme settings > Brand." },
+    { "type": "text", "id": "reply_time", "label": "Reply time", "default": "Within 24 hours, 7 days a week" },
+    { "type": "text", "id": "refunds", "label": "Refunds", "default": "30-day money-back guarantee" },
+    { "type": "text", "id": "ship_to", "label": "We ship to", "default": "The United States and Canada" },
+    { "type": "checkbox", "id": "show_cancel_card", "label": "Show subscription cancel card", "default": true },
+    { "type": "text", "id": "cancel_heading", "label": "Cancel card heading", "default": "Cancelling a subscription?" },
+    { "type": "textarea", "id": "cancel_text", "label": "Cancel card text", "default": "You don't need to email us. Log in to your account, open Subscriptions and press Cancel. It takes one click." },
+    { "type": "text", "id": "cancel_button", "label": "Cancel card button", "default": "Go to my account" }
+  ],
+  "disabled_on": { "groups": ["header", "footer"] }
+}
+{% endschema %}

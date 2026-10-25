@@ -1,0 +1,24 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your gift card – {{ shop.name }}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..800&display=swap">
+    {{ 'mynrg.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body>
+    <main class="sec">
+      <div class="wrap empty-state">
+        <p class="kicker">{{ shop.name | escape }}</p>
+        <h1 class="h1 h1--page">Your gift card: {{ gift_card.balance | money }}</h1>
+        <p class="lede" style="margin:0">Use this code at checkout:</p>
+        <p class="email-addr" style="font-size:28px">{{ gift_card.code | format_code }}</p>
+        {%- if gift_card.expired -%}<p class="form-error">This gift card has expired.</p>{%- endif -%}
+        <a class="btn btn--blue btn--lg" href="{{ shop.url }}">Start shopping</a>
+      </div>
+    </main>
+  </body>
+</html>

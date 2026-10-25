@@ -1,0 +1,134 @@
+{%- comment -%}
+  Reviews: a continuously scrolling carousel of review blocks (pauses on hover, focus or tap).
+  Reviews from an app (Judge.me, Okendo, Junip...) can also be added as app blocks.
+  With no reviews, an honest "no reviews yet" message shows.
+{%- endcomment -%}
+{%- liquid
+  assign review_count = 0
+  assign app_count = 0
+  for b in section.blocks
+    if b.type == 'review' and b.settings.text != blank
+      assign review_count = review_count | plus: 1
+    elsif b.type == '@app'
+      assign app_count = app_count | plus: 1
+    endif
+  endfor
+-%}
+<section class="sec sec--tight"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | escape }}"{% endif %}>
+  <div class="wrap">
+    {%- if review_count > 0 or app_count > 0 -%}
+      <div class="sec-head">
+        {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+        <h2 class="h2">{{ section.settings.heading_with_reviews | escape }}</h2>
+      </div>
+
+      {%- if review_count > 0 -%}
+        <div class="rv" data-rv aria-label="Reviews. Hover or tap to pause.">
+          <div class="rv__track" style="animation-duration: {{ section.settings.speed }}s">
+            {%- for i in (1..2) -%}
+              <ul class="rv__list"{% if i == 2 %} aria-hidden="true"{% endif %}>
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'review' and block.settings.text != blank -%}
+                    {%- assign star_w = block.settings.rating | times: 20 | minus: 2 -%}
+                    <li class="rv-card"{% if i == 1 %} {{ block.shopify_attributes }}{% endif %}>
+                      <div class="rv-stars" role="img" aria-label="Rated {{ block.settings.rating }} out of 5">
+                        <span class="rv-stars__row rv-stars__row--bg" aria-hidden="true">{% for s in (1..5) %}<svg><use href="#i-star"/></svg>{% endfor %}</span>
+                        <span class="rv-stars__row rv-stars__row--fill" style="width: {{ star_w }}px" aria-hidden="true">{% for s in (1..5) %}<svg><use href="#i-star"/></svg>{% endfor %}</span>
+                      </div>
+                      <blockquote>{{ block.settings.text | escape | newline_to_br }}</blockquote>
+                      <div class="rv-who">
+                        <div class="rv-avatar">
+                          {%- if block.settings.photo != blank -%}
+                            {{ block.settings.photo | image_url: width: 120, height: 120, crop: 'center' | image_tag: alt: '', loading: 'lazy' }}
+                          {%- else -%}
+                            {{ block.settings.name | slice: 0 | upcase | escape }}
+                          {%- endif -%}
+                        </div>
+                        <div>
+                          <span class="rv-name">{{ block.settings.name | escape }}{% if block.settings.age != blank %}, {{ block.settings.age | escape }}{% endif %}</span>
+                          {%- if block.settings.date != blank -%}<span class="rv-meta">{{ block.settings.date | escape }}</span>{%- endif -%}
+                        </div>
+                      </div>
+                      {%- if block.settings.badge != blank -%}<span class="rv-badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endfor -%}
+          </div>
+        </div>
+        {%- if section.settings.note != blank -%}<p class="rv-note">{{ section.settings.note | escape }}</p>{%- endif -%}
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          {% render block %}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      <div class="reviews-empty">
+        <div>
+          <h3>{{ section.settings.heading | escape }}</h3>
+          <p>{{ section.settings.text | escape }}</p>
+        </div>
+        {%- if section.settings.button_label != blank -%}
+          <a class="btn btn--line" href="{{ section.settings.button_link | default: '#shop' }}">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "tag": "div",
+  "settings": [
+    { "type": "paragraph", "content": "Add each review as a Review block. Only use real reviews from people who took the product, in their own words. Label friends, family and free-product reviews." },
+    { "type": "text", "id": "kicker", "label": "Small label", "default": "Reviews" },
+    { "type": "text", "id": "heading_with_reviews", "label": "Heading", "default": "What people are saying" },
+    { "type": "text", "id": "note", "label": "Note under the carousel", "default": "Early reviews from friends and family of the MyNrg founder." },
+    { "type": "range", "id": "speed", "label": "Seconds per full loop", "min": 20, "max": 120, "step": 5, "unit": "s", "default": 60 },
+    { "type": "header", "content": "Before you have reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "No reviews yet." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "MyNrg is new. When customers start reviewing, every review will show up here, including the critical ones." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Be one of the first" },
+    { "type": "text", "id": "button_link", "label": "Button link", "default": "#shop" },
+    { "type": "text", "id": "anchor_id", "label": "Section ID (optional)", "default": "reviews" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "name", "label": "First name (and last initial)" },
+        { "type": "text", "id": "age", "label": "Age or age range (optional)" },
+        {
+          "type": "select",
+          "id": "rating",
+          "label": "Stars",
+          "default": "5",
+          "options": [
+            { "value": "5", "label": "5" },
+            { "value": "4.5", "label": "4.5" },
+            { "value": "4", "label": "4" },
+            { "value": "3.5", "label": "3.5" },
+            { "value": "3", "label": "3" },
+            { "value": "2.5", "label": "2.5" },
+            { "value": "2", "label": "2" },
+            { "value": "1.5", "label": "1.5" },
+            { "value": "1", "label": "1" }
+          ]
+        },
+        { "type": "textarea", "id": "text", "label": "Review", "info": "Exactly as the person wrote it." },
+        { "type": "text", "id": "date", "label": "Date (optional)" },
+        { "type": "image_picker", "id": "photo", "label": "Photo (optional)", "info": "Only with the person's permission." },
+        { "type": "text", "id": "badge", "label": "Label", "info": "Required for friends, family or free product, e.g. Friends & family, or Received free product.", "default": "Friends & family" }
+      ]
+    },
+    { "type": "@app" }
+  ],
+  "presets": [ { "name": "Reviews" } ],
+  "disabled_on": { "groups": ["header", "footer"] }
+}
+{% endschema %}

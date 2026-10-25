@@ -1,63 +1,77 @@
-<section class="hero{% if section.settings.image != blank %} hero--image{% endif %}" {{ section.shopify_attributes }}>
-  {% if section.settings.image != blank %}
-    {{
-      section.settings.image
-      | image_url: width: 2000
-      | image_tag: class: 'hero__image', widths: '750, 1100, 1500, 2000'
-    }}
-  {% endif %}
-  <div class="page-width hero__content">
-    {% if section.settings.heading != blank %}
-      <h1>{{ section.settings.heading | escape }}</h1>
-    {% endif %}
-    {% if section.settings.subheading != blank %}
-      <p>{{ section.settings.subheading | escape }}</p>
-    {% endif %}
-    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
-      <a class="button" href="{{ section.settings.button_link }}">
-        {{ section.settings.button_label | escape }}
-      </a>
-    {% endif %}
+<section class="hero"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | escape }}"{% endif %}>
+  <div class="wrap hero__grid">
+    <div>
+      {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+      <h1 class="h1">{{ section.settings.heading | escape }}{% if section.settings.heading_accent != blank %} <span class="blue">{{ section.settings.heading_accent | escape }}</span>{% endif %}</h1>
+      {%- if section.settings.text != blank -%}<p class="lede">{{ section.settings.text | escape }}</p>{%- endif -%}
+      <div class="hero__cta">
+        {%- if section.settings.button_label != blank -%}
+          <a class="btn btn--blue btn--lg" href="{{ section.settings.button_link | default: '#shop' }}">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+        {%- if section.settings.link_label != blank -%}
+          <a class="link" href="{{ section.settings.link_url | default: '#how' }}">{{ section.settings.link_label | escape }}</a>
+        {%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <ul class="stats">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}><strong>{{ block.settings.value | escape }}</strong><span>{{ block.settings.label | escape }}</span></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+    <div class="photo photo--hero">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1200, 1400', sizes: '(min-width: 861px) 50vw, 100vw' }}
+      {%- else -%}
+        <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="{{ section.settings.tag_title | escape }}" width="1400" height="1400" fetchpriority="high">
+      {%- endif -%}
+      {%- if section.settings.tag_title != blank -%}
+        <div class="photo__tag"><strong>{{ section.settings.tag_title | escape }}</strong>{{ section.settings.tag_text | escape }}</div>
+      {%- endif -%}
+    </div>
   </div>
 </section>
 
 {% schema %}
 {
   "name": "Hero",
+  "tag": "div",
+  "max_blocks": 3,
   "settings": [
+    { "type": "text", "id": "kicker", "label": "Small label", "default": "NAD+ Resveratrol · 30 capsules" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "It's 3pm. Your second coffee" },
+    { "type": "text", "id": "heading_accent", "label": "Heading, colored part", "default": "isn't working." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "MyNrg is a daily NAD+ and resveratrol supplement for the afternoon wall. Take it with breakfast for daily support of the cellular energy your body already makes.*" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop MyNrg" },
+    { "type": "text", "id": "button_link", "label": "Button link", "default": "#shop" },
+    { "type": "text", "id": "link_label", "label": "Second link label", "default": "How it works" },
+    { "type": "text", "id": "link_url", "label": "Second link", "default": "#how" },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Square works best. If empty, the built-in bottle photo is used." },
+    { "type": "text", "id": "tag_title", "label": "Image tag, bold line", "default": "Daily support for cellular energy*" },
+    { "type": "text", "id": "tag_text", "label": "Image tag, second line", "default": "Ships to the US & Canada" },
+    { "type": "text", "id": "anchor_id", "label": "Section ID (optional)" }
+  ],
+  "blocks": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "A store made for you"
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Discover our latest products."
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "Shop all"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Number", "default": "30" },
+        { "type": "text", "id": "label", "label": "Label", "default": "capsules in every bottle" }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Hero"
+      "name": "Hero",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "30", "label": "capsules in every bottle" } },
+        { "type": "stat", "settings": { "value": "1", "label": "capsule a day" } },
+        { "type": "stat", "settings": { "value": "1 click", "label": "to cancel a subscription" } }
+      ]
     }
-  ]
+  ],
+  "disabled_on": { "groups": ["header", "footer"] }
 }
 {% endschema %}

@@ -1,0 +1,31 @@
+<section class="page-head">
+  <div class="wrap"><h1 class="h1 h1--page">{{ section.settings.heading | escape }}</h1></div>
+</section>
+<section class="sec" style="padding-top:8px">
+  <div class="wrap">
+    <div class="pgrid">
+      {%- for c in collections -%}
+        <a class="pcard" href="{{ c.url }}">
+          <div class="pcard__img">
+            {%- if c.featured_image -%}
+              {{ c.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: c.title }}
+            {%- else -%}
+              <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="{{ c.title | escape }}" width="1400" height="1400" loading="lazy">
+            {%- endif -%}
+          </div>
+          <span class="pcard__title">{{ c.title | escape }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" }
+  ]
+}
+{% endschema %}

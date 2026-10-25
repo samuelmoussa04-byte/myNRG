@@ -1,0 +1,43 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="strip" aria-label="Product facts">
+    <div class="strip__track" style="animation-duration: {{ section.settings.speed }}s">
+      {%- for i in (1..2) -%}
+        <ul{% if i == 2 %} aria-hidden="true"{% endif %}>
+          {%- for block in section.blocks -%}
+            <li{% if i == 1 %} {{ block.shopify_attributes }}{% endif %}>{{ block.settings.text | escape }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Scrolling facts strip",
+  "tag": "div",
+  "settings": [
+    { "type": "range", "id": "speed", "label": "Seconds per loop", "min": 15, "max": 90, "step": 5, "unit": "s", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Fact",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Ships to the US & Canada" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling facts strip",
+      "blocks": [
+        { "type": "fact", "settings": { "text": "Daily support for cellular energy*" } },
+        { "type": "fact", "settings": { "text": "30 capsules" } },
+        { "type": "fact", "settings": { "text": "Ships to the US & Canada" } }
+      ]
+    }
+  ],
+  "disabled_on": { "groups": ["header", "footer"] }
+}
+{% endschema %}

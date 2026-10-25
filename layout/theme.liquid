@@ -2,31 +2,60 @@
 <html lang="{{ request.locale.iso_code }}">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="{{ settings.background_color }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_paper }}">
     <link rel="canonical" href="{{ canonical_url }}">
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+    {%- endif -%}
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
-    {{ content_for_header }}
-    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {% render 'meta-tags' %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..800&family=Caveat:wght@600;700&display=swap">
+
+    {{ 'mynrg.css' | asset_url | stylesheet_tag }}
+
     <style>
       :root {
-        --color-accent: {{ settings.accent_color }};
-        --color-background: {{ settings.background_color }};
-        --color-foreground: {{ settings.text_color }};
+        --paper: {{ settings.color_paper }};
+        --sand: {{ settings.color_sand }};
+        --ink: {{ settings.color_ink }};
+        --cobalt: {{ settings.color_brand }};
+        --cobalt-hover: {{ settings.color_brand | color_darken: 6 }};
+        --cobalt-deep: {{ settings.color_brand_deep }};
+        --cobalt-tint: {{ settings.color_brand | color_mix: '#ffffff', 11 }};
+        --cobalt-mist: {{ settings.color_brand | color_mix: '#ffffff', 32 }};
       }
     </style>
+
+    {{ content_for_header }}
   </head>
+
   <body>
     <a class="visually-hidden" href="#MainContent">Skip to content</a>
-    {% section 'header' %}
-    <main id="MainContent" role="main">
+    {% render 'icon-sprite' %}
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
-    {% section 'footer' %}
+
+    {% sections 'footer-group' %}
+
+    <script src="{{ 'mynrg.js' | asset_url }}" defer></script>
   </body>
 </html>

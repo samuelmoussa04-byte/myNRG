@@ -1,49 +1,67 @@
-<section class="page-width section" {{ section.shopify_attributes }}>
-  <h1>Your cart</h1>
-  {% if cart.item_count > 0 %}
-    <form action="{{ routes.cart_url }}" method="post">
-      <div class="cart-items">
-        {% for item in cart.items %}
-          <article class="cart-item">
-            <a href="{{ item.url }}">
-              {% if item.image %}
-                {{
-                  item.image
-                  | image_url: width: 240
-                  | image_tag: class: 'cart-item__image', loading: 'lazy'
-                }}
-              {% endif %}
-            </a>
-            <div>
-              <a href="{{ item.url }}">{{ item.product.title | escape }}</a>
-              {% unless item.product.has_only_default_variant %}
-                <p class="muted">{{ item.variant.title | escape }}</p>
-              {% endunless %}
-              <p>{{ item.final_line_price | money }}</p>
-              <label class="field">
-                <span>Quantity</span>
-                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0">
-              </label>
+<section class="page-head">
+  <div class="wrap">
+    <h1 class="h1 h1--page">{{ section.settings.heading | escape }}</h1>
+  </div>
+</section>
+<section class="sec" style="padding-top:8px">
+  <div class="wrap">
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" id="CartForm">
+        <div class="cart-lines">
+          {%- for item in cart.items -%}
+            <div class="cart-line">
+              <a class="cart-line__img" href="{{ item.url }}">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 240 | image_tag: alt: item.product.title, loading: 'lazy' }}
+                {%- else -%}
+                  <img src="{{ 'mynrg-top.jpg' | asset_url }}" alt="{{ item.product.title | escape }}" width="88" height="88" loading="lazy">
+                {%- endif -%}
+              </a>
+              <div>
+                <a href="{{ item.url }}" style="text-decoration:none;font-weight:650">{{ item.product.title | escape }}</a>
+                <div class="cart-line__meta">
+                  {%- unless item.product.has_only_default_variant -%}{{ item.variant.title | escape }}{%- endunless -%}
+                  {%- if item.selling_plan_allocation -%} · {{ item.selling_plan_allocation.selling_plan.name | escape }}{%- endif -%}
+                </div>
+                <div class="qty" data-qty style="margin-top:10px">
+                  <button type="button" data-step="-" aria-label="Decrease quantity">−</button>
+                  <input type="number" name="updates[]" id="Quantity-{{ forloop.index }}" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title | escape }}">
+                  <button type="button" data-step="+" aria-label="Increase quantity">+</button>
+                </div>
+              </div>
+              <div class="num" style="text-align:right;font-weight:650">
+                {{ item.final_line_price | money }}
+                <div><a class="fine" href="{{ item.url_to_remove }}">Remove</a></div>
+              </div>
             </div>
-            <a href="{{ item.url_to_remove }}">Remove</a>
-          </article>
-        {% endfor %}
+          {%- endfor -%}
+        </div>
+        <div class="cart-summary">
+          <div class="cart-summary__row"><span>Subtotal</span><strong>{{ cart.total_price | money_with_currency }}</strong></div>
+          {%- if section.settings.note != blank -%}<p class="fine" style="margin:0">{{ section.settings.note | escape }}</p>{%- endif -%}
+          <button class="btn btn--blue btn--lg btn--block" type="submit" name="checkout">{{ section.settings.checkout_label | escape }}</button>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="empty-state">
+        <p class="lede" style="margin:0">{{ section.settings.empty_text | escape }}</p>
+        <a class="btn btn--blue btn--lg" href="{{ section.settings.empty_link | default: routes.root_url }}">{{ section.settings.empty_button | escape }}</a>
       </div>
-      <div class="cart-summary">
-        <button class="button" type="submit" name="update">Update cart</button>
-        <strong>Subtotal: {{ cart.total_price | money }}</strong>
-        <button class="button" type="submit" name="checkout">Checkout</button>
-      </div>
-    </form>
-  {% else %}
-    <p>Your cart is empty.</p>
-    <a class="button" href="{{ routes.all_products_collection_url }}">Continue shopping</a>
-  {% endif %}
+    {%- endif -%}
+  </div>
 </section>
 
 {% schema %}
 {
   "name": "Cart",
-  "settings": []
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your cart" },
+    { "type": "text", "id": "note", "label": "Note under subtotal", "default": "Shipping and taxes are calculated at checkout. 30-day money-back guarantee." },
+    { "type": "text", "id": "checkout_label", "label": "Checkout button", "default": "Check out" },
+    { "type": "text", "id": "empty_text", "label": "Empty cart text", "default": "Your cart is empty." },
+    { "type": "text", "id": "empty_button", "label": "Empty cart button", "default": "Shop MyNrg" },
+    { "type": "text", "id": "empty_link", "label": "Empty cart button link", "default": "/#shop" }
+  ]
 }
 {% endschema %}
