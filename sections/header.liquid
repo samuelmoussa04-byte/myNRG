@@ -24,7 +24,6 @@
     <div class="hdr__end">
       {%- form 'localization', id: 'CurrencyForm', class: 'hdr__currency-form' -%}
         <input type="hidden" name="country_code" value="{{ target_country_code }}">
-        <input type="hidden" name="return_to" value="{{ request.path }}">
         <button class="hdr__currency" type="submit" aria-label="Switch currency to {{ target_currency }}">
           {{ localization.country.currency.iso_code }}
         </button>
