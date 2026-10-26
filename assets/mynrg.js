@@ -53,27 +53,6 @@
     }
   }
 
-  function setCurrency(next) {
-    var value = next === 'CAD' ? 'CAD' : 'USD';
-    try {
-      window.localStorage.setItem('mynrg-currency', value);
-    } catch (e) {}
-    document.body.setAttribute('data-currency', value);
-    document.querySelectorAll('[data-currency-toggle]').forEach(function (btn) {
-      var label = btn.querySelector('[data-currency-label]');
-      if (label) label.textContent = value;
-      btn.setAttribute('aria-pressed', value === 'CAD' ? 'true' : 'false');
-    });
-    document.querySelectorAll('[data-money-value]').forEach(function (el) {
-      var cents = parseInt(el.getAttribute('data-money-value'), 10);
-      if (!Number.isNaN(cents)) el.textContent = money(cents, { getAttribute: function (name) { return name === 'data-currency' ? value : null; } });
-    });
-    document.querySelectorAll('[data-buy-form]').forEach(function (form) {
-      form.setAttribute('data-currency', value);
-      form.dispatchEvent(new Event('change', { bubbles: true }));
-    });
-  }
-
   /* ---------- buy box ---------- */
   document.querySelectorAll('[data-buy-form]').forEach(function (form) {
     var idInput = form.querySelector('input[name="id"]');
@@ -138,19 +117,6 @@
 
     form.addEventListener('change', render);
     render();
-  });
-
-  var storedCurrency = 'USD';
-  try {
-    storedCurrency = window.localStorage.getItem('mynrg-currency') || 'USD';
-  } catch (e) {}
-  setCurrency(storedCurrency === 'CAD' ? 'CAD' : 'USD');
-
-  document.querySelectorAll('[data-currency-toggle]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var next = (document.body.getAttribute('data-currency') || 'USD') === 'CAD' ? 'USD' : 'CAD';
-      setCurrency(next);
-    });
   });
 
   /* ---------- gallery ---------- */

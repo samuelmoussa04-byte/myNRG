@@ -1,4 +1,26 @@
 {%- assign logo_style = 'height: ' | append: section.settings.logo_height | append: 'px; width: auto;' -%}
+{%- assign us_available = false -%}
+{%- assign ca_available = false -%}
+{%- for country in localization.available_countries -%}
+  {%- if country.iso_code == 'US' -%}
+    {%- assign us_available = true -%}
+  {%- elsif country.iso_code == 'CA' -%}
+    {%- assign ca_available = true -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if localization.country.iso_code == 'CA' -%}
+  {%- assign target_country_code = 'US' -%}
+  {%- assign target_currency = 'USD' -%}
+{%- else -%}
+  {%- assign target_country_code = 'CA' -%}
+  {%- assign target_currency = 'CAD' -%}
+{%- endif -%}
+{%- assign show_currency_switch = false -%}
+{%- if us_available and ca_available -%}
+  {%- if localization.country.iso_code == 'US' or localization.country.iso_code == 'CA' -%}
+    {%- assign show_currency_switch = true -%}
+  {%- endif -%}
+{%- endif -%}
 <header class="hdr">
   <div class="wrap hdr__in">
     <nav class="hdr__nav" aria-label="Main">
@@ -15,9 +37,15 @@
       {%- endif -%}
     </a>
     <div class="hdr__end">
-      <button class="hdr__currency" type="button" data-currency-toggle aria-label="Switch currency between USD and CAD" aria-pressed="false">
-        <span data-currency-label>USD</span>
-      </button>
+      {%- if show_currency_switch -%}
+        {%- form 'localization', id: 'CurrencyForm', class: 'hdr__currency-form' -%}
+          <input type="hidden" name="country_code" value="{{ target_country_code }}">
+          <input type="hidden" name="return_to" value="{{ request.path }}">
+          <button class="hdr__currency" type="submit" aria-label="Switch currency to {{ target_currency }}">
+            {{ localization.country.currency.iso_code }}
+          </button>
+        {%- endform -%}
+      {%- endif -%}
       {%- if section.settings.show_button and section.settings.button_label != blank -%}
         <a class="btn btn--blue hdr__btn" href="{{ section.settings.button_link | default: '#shop' }}">{{ section.settings.button_label | escape }}</a>
       {%- endif -%}

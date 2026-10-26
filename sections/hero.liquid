@@ -12,8 +12,8 @@
         <div class="hero__promo" aria-label="Spooktober special: save {{ promo_percentage }} percent">
           <span class="hero__promo-label">Spooktober special · Save {{ promo_percentage }}%</span>
           <span class="hero__promo-prices">
-            <strong data-money-value="{{ promo_variant.price | times: 100 | round }}">{{ promo_variant.price | money }}</strong>
-            <s data-money-value="{{ promo_variant.compare_at_price | times: 100 | round }}">{{ promo_variant.compare_at_price | money }}</s>
+            <strong>{{ promo_variant.price | money }}</strong>
+            <s>{{ promo_variant.compare_at_price | money }}</s>
           </span>
           <span class="hero__promo-detail">One bottle · No code needed</span>
         </div>
