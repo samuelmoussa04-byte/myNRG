@@ -15,6 +15,9 @@
       {%- endif -%}
     </a>
     <div class="hdr__end">
+      <button class="hdr__currency" type="button" data-currency-toggle aria-label="Switch currency between USD and CAD" aria-pressed="false">
+        <span data-currency-label>USD</span>
+      </button>
       {%- if section.settings.show_button and section.settings.button_label != blank -%}
         <a class="btn btn--blue hdr__btn" href="{{ section.settings.button_link | default: '#shop' }}">{{ section.settings.button_label | escape }}</a>
       {%- endif -%}

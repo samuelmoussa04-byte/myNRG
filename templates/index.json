@@ -73,7 +73,7 @@
         "fact-5": {
           "type": "fact",
           "settings": {
-            "text": "Halloween sale · Save 36% on every pack"
+            "text": "Spooktober special · Save 36% on every pack"
           }
         },
         "fact-6": {
@@ -265,7 +265,7 @@
         "drawer-subs"
       ],
       "settings": {
-        "assure_1": "Halloween sale · Save 36%",
+        "assure_1": "Spooktober special · Save 36%",
         "days_per_bottle": 120
       }
     },
