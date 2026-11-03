@@ -643,8 +643,8 @@
     }
   },
   "order": [
-    "hero",
     "promo-alert",
+    "hero",
     "strip",
     "shop",
     "why",
