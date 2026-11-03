@@ -1,0 +1,29 @@
+{%- assign promo_alert_now = 'now' | date: '%s' | plus: 0 -%}
+{%- if promo_alert_now < 1793768400 -%}
+  <section class="promo-alert" aria-labelledby="PromoAlertHeading">
+    <div class="wrap">
+      <div class="promo-alert__card">
+        <div class="promo-alert__content">
+          <p class="promo-alert__eyebrow"><span aria-hidden="true"></span> Spooktober special · Final day</p>
+          <h2 class="promo-alert__title" id="PromoAlertHeading">Last chance to claim your discount.</h2>
+          <p class="promo-alert__text">Today is the final day to save 36%. Shop now while the Spooktober special is still live.</p>
+        </div>
+        <a class="btn btn--white promo-alert__button" href="#shop">Claim the offer <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Final-day offer alert",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Final-day offer alert"
+    }
+  ],
+  "enabled_on": { "templates": ["index"] }
+}
+{% endschema %}

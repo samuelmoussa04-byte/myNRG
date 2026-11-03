@@ -43,6 +43,10 @@
         "promo_product": "nad"
       }
     },
+    "promo-alert": {
+      "type": "promo-alert",
+      "settings": {}
+    },
     "strip": {
       "type": "facts-strip",
       "blocks": {
@@ -640,6 +644,7 @@
   },
   "order": [
     "hero",
+    "promo-alert",
     "strip",
     "shop",
     "why",
