@@ -208,28 +208,38 @@
     var footer = document.querySelector('.ftr');
     var buyVisible = false;
     var stickyBaseBottom = 12;
-    var stickyHeight = 0;
+    var footerFrame = 0;
+    var measureStickyBaseBottom = function () {
+      sticky.style.removeProperty('--sticky-footer-offset');
+      stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
+    };
     var updateFooterPosition = function () {
       if (!footer) return;
       var footerTop = footer.getBoundingClientRect().top;
-      var stickyTop = window.innerHeight - stickyBaseBottom - stickyHeight;
-      sticky.classList.toggle('is-footer-hidden', footerTop <= stickyTop);
+      var offset = Math.max(0, window.innerHeight - footerTop - stickyBaseBottom);
+      sticky.style.setProperty('--sticky-footer-offset', offset + 'px');
+    };
+    var scheduleFooterPosition = function () {
+      if (footerFrame) return;
+      footerFrame = window.requestAnimationFrame(function () {
+        footerFrame = 0;
+        updateFooterPosition();
+      });
     };
     var update = function () {
       var past = window.scrollY > Math.min(700, window.innerHeight * 0.9);
       sticky.classList.toggle('is-visible', past && !buyVisible);
-      updateFooterPosition();
+      scheduleFooterPosition();
     };
-    stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
-    stickyHeight = sticky.getBoundingClientRect().height;
+    measureStickyBaseBottom();
+    updateFooterPosition();
     new IntersectionObserver(function (entries) {
       buyVisible = entries[0].isIntersecting;
       update();
     }, { threshold: 0.05 }).observe(buyBox);
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', function () {
-      stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
-      stickyHeight = sticky.getBoundingClientRect().height;
+      measureStickyBaseBottom();
       update();
     });
     document.addEventListener('mynrg:buy-change', function (e) {
