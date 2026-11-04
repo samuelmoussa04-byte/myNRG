@@ -29,42 +29,12 @@
   /* ---------- first-order email offer ---------- */
   document.querySelectorAll('[data-first-order-popup]').forEach(function (popup) {
     var close = popup.querySelector('[data-first-order-close]');
-    var storageKey = 'mynrg-first-order-offer';
     var submitted = popup.querySelector('[data-first-order-copy]');
     var form = popup.querySelector('#FirstOrderOfferForm');
-    var dismissedAt = 0;
 
-    try {
-      dismissedAt = parseInt(window.localStorage.getItem(storageKey) || '0', 10) || 0;
-    } catch (e) {
-      dismissedAt = 0;
-    }
-
-    if (submitted) {
-      try {
-        window.localStorage.setItem(storageKey, String(Date.now()));
-      } catch (e) {
-        // The success state remains available for the current page view.
-      }
-    }
-
-    function rememberDismissal() {
-      try {
-        window.localStorage.setItem(storageKey, String(Date.now()));
-      } catch (e) {
-        // The popup can still be dismissed for this page view.
-      }
-    }
-
-    function dismiss() {
-      popup.close();
-      rememberDismissal();
-    }
-
-    if (close) close.addEventListener('click', dismiss);
-    popup.addEventListener('cancel', rememberDismissal);
+    if (close) close.addEventListener('click', function () { popup.close(); });
     popup.addEventListener('click', function (event) {
-      if (event.target === popup) dismiss();
+      if (event.target === popup) popup.close();
     });
 
     var copyButton = popup.querySelector('[data-first-order-copy]');
@@ -104,7 +74,7 @@
 
     if (submitted || (form && form.querySelector('[role="alert"]'))) {
       popup.showModal();
-    } else if (!dismissedAt || Date.now() - dismissedAt >= 30 * 24 * 60 * 60 * 1000) {
+    } else {
       window.setTimeout(function () {
         if (!popup.open) popup.showModal();
       }, 1200);
