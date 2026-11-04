@@ -1,4 +1,16 @@
-<section class="sec sec--sand" id="{{ section.settings.anchor_id | default: 'shop' }}">
+<section class="sec sec--sand sec--product" id="{{ section.settings.anchor_id | default: 'shop' }}">
+  <div class="wrap">
+    <aside class="product-warning" aria-label="Counterfeit product warning">
+      <svg class="product-warning__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="10" fill="currentColor" />
+        <path d="M12 10.5v6M12 7.5h.01" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2" />
+      </svg>
+      <div>
+        <p class="product-warning__title">Please be careful of scams — we do not sell on Amazon.</p>
+        <p class="product-warning__text">MyNrg products are only sold here at mynrg.store. Beware of unauthorized listings on Amazon or eBay.</p>
+      </div>
+    </aside>
+  </div>
   {%- render 'buy-box', product: product, section: section, heading_tag: 'h1' -%}
 </section>
 
