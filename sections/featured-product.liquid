@@ -5,8 +5,7 @@
   endif
 -%}
 {%- if featured != blank -%}
-  <section class="sec sec--sand sec--product" id="{{ section.settings.anchor_id | default: 'shop' }}">
-    {%- render 'product-warning' -%}
+  <section class="sec sec--sand" id="{{ section.settings.anchor_id | default: 'shop' }}">
     {%- render 'buy-box', product: featured, section: section, heading_tag: 'h2' -%}
   </section>
 {%- else -%}

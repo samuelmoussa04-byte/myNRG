@@ -92,6 +92,8 @@
       </ul>
     {%- endif -%}
 
+    {%- render 'product-warning' -%}
+
     <input type="hidden" name="id" value="{{ current_variant.id }}">
 
     {%- if has_plans -%}
