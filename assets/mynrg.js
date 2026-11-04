@@ -205,16 +205,38 @@
   var sticky = document.querySelector('[data-sticky-buy]');
   var buyBox = document.querySelector('[data-buy-form]');
   if (sticky && buyBox && 'IntersectionObserver' in window) {
+    var footer = document.querySelector('.ftr');
     var buyVisible = false;
+    var stickyBaseBottom = 12;
+    var stickyHeight = 0;
+    var measureStickyBaseBottom = function () {
+      sticky.style.removeProperty('--sticky-footer-offset');
+      stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
+    };
+    var updateFooterPosition = function () {
+      if (!footer) return;
+      var footerTop = footer.getBoundingClientRect().top;
+      var offset = Math.max(0, window.innerHeight - footerTop - stickyBaseBottom);
+      sticky.style.setProperty('--sticky-footer-offset', offset + 'px');
+      sticky.classList.toggle('is-footer-hidden', footerTop <= stickyHeight + stickyBaseBottom);
+    };
     var update = function () {
       var past = window.scrollY > Math.min(700, window.innerHeight * 0.9);
       sticky.classList.toggle('is-visible', past && !buyVisible);
+      updateFooterPosition();
     };
+    measureStickyBaseBottom();
+    stickyHeight = sticky.getBoundingClientRect().height;
     new IntersectionObserver(function (entries) {
       buyVisible = entries[0].isIntersecting;
       update();
     }, { threshold: 0.05 }).observe(buyBox);
     window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', function () {
+      measureStickyBaseBottom();
+      stickyHeight = sticky.getBoundingClientRect().height;
+      update();
+    });
     document.addEventListener('mynrg:buy-change', function (e) {
       var p = sticky.querySelector('[data-sticky-price]');
       if (p) p.textContent = e.detail.price;
