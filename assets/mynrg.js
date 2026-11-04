@@ -209,23 +209,18 @@
     var buyVisible = false;
     var stickyBaseBottom = 12;
     var stickyHeight = 0;
-    var measureStickyBaseBottom = function () {
-      sticky.style.removeProperty('--sticky-footer-offset');
-      stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
-    };
     var updateFooterPosition = function () {
       if (!footer) return;
       var footerTop = footer.getBoundingClientRect().top;
-      var offset = Math.max(0, window.innerHeight - footerTop - stickyBaseBottom);
-      sticky.style.setProperty('--sticky-footer-offset', offset + 'px');
-      sticky.classList.toggle('is-footer-hidden', footerTop <= stickyHeight + stickyBaseBottom);
+      var stickyTop = window.innerHeight - stickyBaseBottom - stickyHeight;
+      sticky.classList.toggle('is-footer-hidden', footerTop <= stickyTop);
     };
     var update = function () {
       var past = window.scrollY > Math.min(700, window.innerHeight * 0.9);
       sticky.classList.toggle('is-visible', past && !buyVisible);
       updateFooterPosition();
     };
-    measureStickyBaseBottom();
+    stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
     stickyHeight = sticky.getBoundingClientRect().height;
     new IntersectionObserver(function (entries) {
       buyVisible = entries[0].isIntersecting;
@@ -233,7 +228,7 @@
     }, { threshold: 0.05 }).observe(buyBox);
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', function () {
-      measureStickyBaseBottom();
+      stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
       stickyHeight = sticky.getBoundingClientRect().height;
       update();
     });
