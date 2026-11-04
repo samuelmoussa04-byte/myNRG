@@ -38,6 +38,7 @@
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
+  position: relative;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -158,16 +159,15 @@ button { font: inherit; color: inherit; }
 
 /* ---------- seasonal Halloween accents ---------- */
 .halloween-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
-.halloween-flight { position: fixed; z-index: 49; inset: 0; overflow: hidden; pointer-events: none; }
-.halloween-flight__bat { position: absolute; width: 48px; height: 26px; fill: #17151A; opacity: .78; filter: drop-shadow(0 2px 3px rgba(17, 18, 20, .14)); animation: halloween-bat-drift 8s ease-in-out infinite; }
+.halloween-flight { position: absolute; z-index: 49; inset: 0; overflow: hidden; pointer-events: none; }
+.halloween-flight__bat { position: absolute; width: var(--gutter); height: auto; fill: #17151A; opacity: .78; filter: drop-shadow(0 2px 3px rgba(17, 18, 20, .14)); }
 .halloween-bat__eye { fill: #F28A45; }
-.halloween-flight__bat--one { top: 42vh; right: -17px; width: 50px; animation-delay: -2.5s; transform: scaleX(-1) rotate(7deg); }
-.halloween-flight__bat--two { top: 64vh; left: -19px; width: 48px; opacity: .68; animation-delay: -4s; }
-.halloween-flight__bat--three { top: 82vh; right: -19px; width: 56px; animation-delay: -5.5s; }
-.halloween-flight__bat--four { top: 91vh; left: -15px; width: 42px; opacity: .62; animation-delay: -1s; }
-@keyframes halloween-bat-drift { 0%, 100% { translate: 0 0; rotate: -3deg; } 50% { translate: 8px -8px; rotate: 3deg; } }
+.halloween-flight__bat--one { top: 9%; right: 0; transform: scaleX(-1); }
+.halloween-flight__bat--two { top: 31%; left: 0; opacity: .68; }
+.halloween-flight__bat--three { top: 56%; right: 0; }
+.halloween-flight__bat--four { top: 81%; left: 0; opacity: .62; }
 .ftr__halloween { display: inline-flex; align-items: center; gap: 8px; }
-.halloween-egg { display: grid; place-items: center; width: 38px; height: 32px; padding: 4px; border: 0; border-radius: 6px; background: transparent; color: #17151A; cursor: pointer; }
+.halloween-egg { display: grid; place-items: center; width: 38px; height: 32px; padding: 4px; border: 0; border-radius: 6px; background: transparent; color: #E5C98F; cursor: pointer; }
 .halloween-egg svg { width: 28px; height: 16px; fill: currentColor; transition: transform .15s ease; }
 .halloween-egg:hover svg, .halloween-egg[aria-expanded="true"] svg { transform: translateY(-2px) rotate(-8deg); }
 .halloween-egg:focus-visible { outline: 2px solid #E5C98F; outline-offset: 2px; }
@@ -564,10 +564,6 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
   .hero__grid, .how, .shop, .cancel, .faq, .final, .contact { grid-template-columns: 1fr; }
   .promo-alert__card { align-items: flex-start; flex-direction: column; }
   .promo-alert__spider { right: 14px; width: 30px; height: 58px; opacity: .45; }
-  .halloween-flight__bat--one { top: 42vh; right: -20px; width: 42px; }
-  .halloween-flight__bat--two { top: 64vh; left: -19px; width: 40px; }
-  .halloween-flight__bat--three { top: 82vh; right: -21px; width: 45px; }
-  .halloween-flight__bat--four { top: 91vh; left: -15px; width: 36px; }
   .side { position: static; }
   .quick { grid-template-columns: 1fr 1fr; }
   .cards3, .sci { grid-template-columns: 1fr; }
@@ -603,7 +599,7 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .strip__track { animation: none; }
-  .promo-alert__spider, .halloween-flight__bat { animation: none; }
+  .promo-alert__spider { animation: none; }
   .btn, .sticky-buy, .pack { transition: none; }
 }
 
