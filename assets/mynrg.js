@@ -26,6 +26,91 @@
     });
   });
 
+  /* ---------- first-order email offer ---------- */
+  document.querySelectorAll('[data-first-order-popup]').forEach(function (popup) {
+    var close = popup.querySelector('[data-first-order-close]');
+    var storageKey = 'mynrg-first-order-offer';
+    var submitted = popup.querySelector('[data-first-order-copy]');
+    var form = popup.querySelector('#FirstOrderOfferForm');
+    var dismissedAt = 0;
+
+    try {
+      dismissedAt = parseInt(window.localStorage.getItem(storageKey) || '0', 10) || 0;
+    } catch (e) {
+      dismissedAt = 0;
+    }
+
+    if (submitted) {
+      try {
+        window.localStorage.setItem(storageKey, String(Date.now()));
+      } catch (e) {
+        // The success state remains available for the current page view.
+      }
+    }
+
+    function rememberDismissal() {
+      try {
+        window.localStorage.setItem(storageKey, String(Date.now()));
+      } catch (e) {
+        // The popup can still be dismissed for this page view.
+      }
+    }
+
+    function dismiss() {
+      popup.close();
+      rememberDismissal();
+    }
+
+    if (close) close.addEventListener('click', dismiss);
+    popup.addEventListener('cancel', rememberDismissal);
+    popup.addEventListener('click', function (event) {
+      if (event.target === popup) dismiss();
+    });
+
+    var copyButton = popup.querySelector('[data-first-order-copy]');
+    if (copyButton) {
+      var copyLabel = copyButton.textContent;
+      copyButton.addEventListener('click', function () {
+        var code = copyButton.getAttribute('data-first-order-copy');
+        var copied = function () {
+          copyButton.textContent = 'Copied';
+          window.setTimeout(function () { copyButton.textContent = copyLabel; }, 1800);
+        };
+        var fallbackCopy = function () {
+          var input = document.createElement('textarea');
+          input.value = code;
+          input.setAttribute('readonly', '');
+          input.style.position = 'fixed';
+          input.style.opacity = '0';
+          document.body.appendChild(input);
+          input.select();
+          try {
+            if (document.execCommand('copy')) {
+              copied();
+            } else {
+              copyButton.textContent = 'Copy unavailable';
+            }
+          } finally {
+            input.remove();
+          }
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(copied).catch(fallbackCopy);
+          return;
+        }
+        fallbackCopy();
+      });
+    }
+
+    if (submitted || (form && form.querySelector('[role="alert"]'))) {
+      popup.showModal();
+    } else if (!dismissedAt || Date.now() - dismissedAt >= 30 * 24 * 60 * 60 * 1000) {
+      window.setTimeout(function () {
+        if (!popup.open) popup.showModal();
+      }, 1200);
+    }
+  });
+
   /* ---------- Halloween footer easter egg ---------- */
   document.querySelectorAll('[data-halloween-egg]').forEach(function (btn) {
     var message = document.getElementById(btn.getAttribute('aria-controls'));

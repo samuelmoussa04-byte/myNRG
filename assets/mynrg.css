@@ -651,3 +651,59 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
 .day--good .slot--low .slot__bar { background: rgba(255, 255, 255, .18); }
 .day--good .slot--low .slot__bar i { background: #9BE3B8; }
 .day--good .slot--low .slot__time small { color: #BFE9D1; }
+
+/* ---------- first-order email offer ---------- */
+.first-order-popup {
+  position: fixed;
+  inset: 50% auto auto 50%;
+  width: min(520px, calc(100vw - 32px));
+  max-width: none;
+  max-height: min(90vh, 760px);
+  margin: 0;
+  padding: clamp(26px, 5vw, 44px);
+  overflow: auto;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 24px 80px rgba(17, 18, 20, .24);
+}
+.first-order-popup::backdrop { background: rgba(17, 18, 20, .62); }
+.first-order-popup__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--sand);
+  color: var(--ink-2);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.first-order-popup__content { display: grid; gap: 14px; padding-top: 8px; }
+.first-order-popup__content h2 { max-width: 13ch; margin: 0; font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.05; letter-spacing: -.045em; }
+.first-order-popup__content > p { margin: 0; color: var(--ink-2); }
+.first-order-popup__eyebrow { color: var(--cobalt) !important; font-size: 12px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+.first-order-popup__form { display: grid; gap: 12px; }
+.first-order-popup__email-label { font-size: 14px; font-weight: 650; }
+.first-order-popup__consent { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: start; color: var(--ink-2); font-size: 13.5px; line-height: 1.45; cursor: pointer; }
+.first-order-popup__consent input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--cobalt); }
+.first-order-popup__submit { width: 100%; margin-top: 4px; }
+.first-order-popup__fineprint { font-size: 12.5px; color: var(--ink-3) !important; }
+.first-order-popup__error { margin: 0; padding: 12px; border-radius: var(--r-sm); background: #FBEAE7; color: var(--stop) !important; font-size: 14px; }
+.first-order-popup__code-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px; border: 1px dashed var(--cobalt); border-radius: var(--r-md); background: var(--cobalt-tint); }
+.first-order-popup__code { flex: 1; min-width: 140px; color: var(--cobalt-deep); font-size: 1.5rem; font-weight: 750; letter-spacing: .08em; }
+.first-order-popup__account { font-size: 14px; }
+.first-order-popup__account-link { justify-self: start; color: var(--cobalt); font-weight: 650; text-underline-offset: 3px; }
+@media (max-width: 520px) {
+  .first-order-popup { padding: 28px 20px; }
+  .first-order-popup__code-row { align-items: stretch; }
+  .first-order-popup__code-row .btn { flex: 1; }
+}

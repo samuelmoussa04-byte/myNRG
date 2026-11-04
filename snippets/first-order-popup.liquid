@@ -1,0 +1,36 @@
+{%- unless customer -%}
+  <dialog class="first-order-popup" data-first-order-popup aria-labelledby="FirstOrderPopupTitle">
+    <button class="first-order-popup__close" type="button" data-first-order-close aria-label="Close offer">×</button>
+    <div class="first-order-popup__content">
+      {%- form 'customer', id: 'FirstOrderOfferForm', class: 'first-order-popup__form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="first-order-popup__eyebrow">Welcome to MyNrg</p>
+        <h2 id="FirstOrderPopupTitle">Your 20% welcome offer is ready.</h2>
+        <p>Use this code at checkout on your first order. We’ll also email you a copy shortly.</p>
+        <div class="first-order-popup__code-row">
+          <code class="first-order-popup__code">FIRSTNRG</code>
+          <button class="btn btn--blue" type="button" data-first-order-copy="FIRSTNRG">Copy code</button>
+        </div>
+        <p class="first-order-popup__account">Create your free MyNrg account with the same email to keep your orders and profile together.</p>
+        <a class="first-order-popup__account-link" href="{{ routes.account_url }}">Create or sign in to your account</a>
+      {%- else -%}
+        <p class="first-order-popup__eyebrow">A little welcome gift</p>
+        <h2 id="FirstOrderPopupTitle">Take 20% off your first order.</h2>
+        <p>Subscribe to MyNrg emails to unlock your welcome code. It’ll appear here and we’ll email you a copy.</p>
+        <input type="hidden" name="contact[tags]" value="newsletter, first-order-offer">
+        <label class="first-order-popup__email-label" for="FirstOrderOfferEmail">Email address</label>
+        <input class="field" id="FirstOrderOfferEmail" type="email" name="contact[email]" autocomplete="email" placeholder="you@example.com" value="{{ form.email | escape }}" required>
+        <label class="first-order-popup__consent">
+          <input type="checkbox" name="contact[accepts_marketing]" value="true" required>
+          <span>Yes, email me MyNrg news, offers, and promotions. I can unsubscribe at any time.</span>
+        </label>
+        {%- if form.errors -%}
+          <p class="first-order-popup__error" role="alert">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+        <button class="btn btn--blue first-order-popup__submit" type="submit">Get my 20% code</button>
+        <p class="first-order-popup__fineprint">Offer for first-time customers. One use per customer. See discount terms at checkout.</p>
+      {%- endif -%}
+      {%- endform -%}
+    </div>
+  </dialog>
+{%- endunless -%}
