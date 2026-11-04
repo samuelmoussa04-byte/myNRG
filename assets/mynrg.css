@@ -161,11 +161,10 @@ button { font: inherit; color: inherit; }
 .halloween-flight { position: fixed; z-index: 49; inset: 0; overflow: hidden; pointer-events: none; }
 .halloween-flight__bat { position: absolute; width: 48px; height: 26px; fill: #17151A; opacity: .78; filter: drop-shadow(0 2px 3px rgba(17, 18, 20, .14)); animation: halloween-bat-drift 8s ease-in-out infinite; }
 .halloween-bat__eye { fill: #F28A45; }
-.halloween-flight__bat--one { top: 22vh; left: -16px; width: 58px; transform: rotate(-8deg); }
-.halloween-flight__bat--two { top: 42vh; right: -17px; width: 50px; animation-delay: -2.5s; transform: scaleX(-1) rotate(7deg); }
-.halloween-flight__bat--three { top: 64vh; left: -19px; width: 48px; opacity: .68; animation-delay: -4s; }
-.halloween-flight__bat--four { top: 82vh; right: -19px; width: 56px; animation-delay: -5.5s; }
-.halloween-flight__bat--five { top: 91vh; left: -15px; width: 42px; opacity: .62; animation-delay: -1s; }
+.halloween-flight__bat--one { top: 42vh; right: -17px; width: 50px; animation-delay: -2.5s; transform: scaleX(-1) rotate(7deg); }
+.halloween-flight__bat--two { top: 64vh; left: -19px; width: 48px; opacity: .68; animation-delay: -4s; }
+.halloween-flight__bat--three { top: 82vh; right: -19px; width: 56px; animation-delay: -5.5s; }
+.halloween-flight__bat--four { top: 91vh; left: -15px; width: 42px; opacity: .62; animation-delay: -1s; }
 @keyframes halloween-bat-drift { 0%, 100% { translate: 0 0; rotate: -3deg; } 50% { translate: 8px -8px; rotate: 3deg; } }
 .ftr__halloween { display: inline-flex; align-items: center; gap: 8px; }
 .halloween-egg { display: grid; place-items: center; width: 38px; height: 32px; padding: 4px; border: 0; border-radius: 6px; background: transparent; color: #17151A; cursor: pointer; }
@@ -565,11 +564,10 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
   .hero__grid, .how, .shop, .cancel, .faq, .final, .contact { grid-template-columns: 1fr; }
   .promo-alert__card { align-items: flex-start; flex-direction: column; }
   .promo-alert__spider { right: 14px; width: 30px; height: 58px; opacity: .45; }
-  .halloween-flight__bat--one { top: 26vh; left: -20px; width: 45px; }
-  .halloween-flight__bat--two { top: 48vh; right: -20px; width: 42px; }
-  .halloween-flight__bat--three { top: 68vh; left: -19px; width: 40px; }
-  .halloween-flight__bat--four { top: 83vh; right: -21px; width: 45px; }
-  .halloween-flight__bat--five { display: none; }
+  .halloween-flight__bat--one { top: 42vh; right: -20px; width: 42px; }
+  .halloween-flight__bat--two { top: 64vh; left: -19px; width: 40px; }
+  .halloween-flight__bat--three { top: 82vh; right: -21px; width: 45px; }
+  .halloween-flight__bat--four { top: 91vh; left: -15px; width: 36px; }
   .side { position: static; }
   .quick { grid-template-columns: 1fr 1fr; }
   .cards3, .sci { grid-template-columns: 1fr; }
