@@ -137,7 +137,7 @@ button { font: inherit; color: inherit; }
 .promo-alert__card {
   position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center; justify-content: space-between;
   gap: 20px; padding: clamp(16px, 2vw, 22px) clamp(20px, 3vw, 32px); border-radius: 22px;
-  color: var(--white); background: radial-gradient(ellipse at 92% 10%, rgba(84, 125, 196, .36), transparent 38%), linear-gradient(115deg, var(--cobalt-deep), var(--cobalt));
+  color: var(--white); background: radial-gradient(ellipse at 12% 100%, rgba(221, 100, 44, .22), transparent 34%), radial-gradient(ellipse at 92% 10%, rgba(84, 125, 196, .36), transparent 38%), linear-gradient(115deg, var(--cobalt-deep), var(--cobalt));
   box-shadow: 0 12px 28px rgba(18, 40, 90, .14);
 }
 .promo-alert__card::before { position: absolute; z-index: 0; top: 0; right: 0; width: clamp(140px, 20vw, 230px); height: 100%; content: ""; opacity: .25; background: repeating-conic-gradient(from 0deg at 100% 0%, transparent 0deg 14deg, rgba(229, 201, 143, .7) 14deg 14.8deg, transparent 15deg 30deg), repeating-radial-gradient(circle at 100% 0%, transparent 0 17px, rgba(229, 201, 143, .7) 18px 19px, transparent 20px 30px); mask-image: radial-gradient(ellipse at 100% 0%, #000 0 38%, transparent 76%); }
@@ -146,8 +146,9 @@ button { font: inherit; color: inherit; }
 .promo-alert__spider-thread, .promo-alert__spider-legs { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
 .promo-alert__spider-body { fill: currentColor; }
 .promo-alert__spider-legs { stroke-width: 1.25; }
-.promo-alert__eyebrow { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; color: #E5C98F; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.promo-alert__eyebrow { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; color: #F4C982; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .promo-alert__eyebrow span { width: 7px; height: 7px; border-radius: 50%; background: #E5C98F; box-shadow: 0 0 0 3px rgba(229, 201, 143, .16); }
+.promo-alert__pumpkin { width: 16px; height: 16px; margin-left: 2px; color: #F28A45; }
 .promo-alert__title { max-width: 28ch; margin: 0; color: var(--white); font-size: clamp(1.25rem, 2vw, 1.8rem); font-weight: 650; line-height: 1.08; letter-spacing: -.035em; text-wrap: balance; }
 .promo-alert__text { max-width: 56ch; margin: 5px 0 0; color: rgba(255, 255, 255, .82); font-size: clamp(.88rem, 1vw, .98rem); }
 .promo-alert__button { flex: 0 0 auto; position: relative; z-index: 2; gap: 8px; min-height: 44px; padding-inline: 20px; font-size: 14px; }
@@ -156,15 +157,19 @@ button { font: inherit; color: inherit; }
 @keyframes halloween-spider-sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 
 /* ---------- seasonal Halloween accents ---------- */
+.halloween-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 .halloween-flight { position: fixed; z-index: 49; inset: 0; overflow: hidden; pointer-events: none; }
-.halloween-flight__bat { position: absolute; width: 25px; height: 12px; fill: #E5C98F; opacity: .42; animation: halloween-bat-drift 7s ease-in-out infinite; }
-.halloween-flight__bat--one { top: 31vh; left: 2px; }
-.halloween-flight__bat--two { top: 61vh; right: 2px; width: 21px; animation-delay: -2.5s; }
-.halloween-flight__bat--three { top: 84vh; left: 4px; width: 17px; opacity: .3; animation-delay: -4s; }
-@keyframes halloween-bat-drift { 0%, 100% { transform: translate(0, 0) rotate(-4deg); } 50% { transform: translate(4px, -5px) rotate(4deg); } }
+.halloween-flight__bat { position: absolute; width: 48px; height: 26px; fill: #17151A; opacity: .78; filter: drop-shadow(0 2px 3px rgba(17, 18, 20, .14)); animation: halloween-bat-drift 8s ease-in-out infinite; }
+.halloween-bat__eye { fill: #F28A45; }
+.halloween-flight__bat--one { top: 22vh; left: 2.5vw; transform: rotate(-8deg); }
+.halloween-flight__bat--two { top: 39vh; right: 3vw; width: 38px; animation-delay: -2.5s; transform: scaleX(-1) rotate(7deg); }
+.halloween-flight__bat--three { top: 58vh; left: 1.5vw; width: 31px; opacity: .68; animation-delay: -4s; }
+.halloween-flight__bat--four { top: 76vh; right: 1.5vw; width: 52px; animation-delay: -5.5s; }
+.halloween-flight__bat--five { top: 90vh; left: 12vw; width: 27px; opacity: .62; animation-delay: -1s; }
+@keyframes halloween-bat-drift { 0%, 100% { translate: 0 0; rotate: -3deg; } 50% { translate: 8px -8px; rotate: 3deg; } }
 .ftr__halloween { display: inline-flex; align-items: center; gap: 8px; }
-.halloween-egg { display: grid; place-items: center; width: 30px; height: 26px; padding: 4px; border: 0; border-radius: 6px; background: transparent; color: #E5C98F; cursor: pointer; }
-.halloween-egg svg { width: 22px; height: 12px; fill: currentColor; transition: transform .15s ease; }
+.halloween-egg { display: grid; place-items: center; width: 38px; height: 32px; padding: 4px; border: 0; border-radius: 6px; background: transparent; color: #17151A; cursor: pointer; }
+.halloween-egg svg { width: 28px; height: 16px; fill: currentColor; transition: transform .15s ease; }
 .halloween-egg:hover svg, .halloween-egg[aria-expanded="true"] svg { transform: translateY(-2px) rotate(-8deg); }
 .halloween-egg:focus-visible { outline: 2px solid #E5C98F; outline-offset: 2px; }
 .halloween-egg__message { color: #E5C98F; }
@@ -560,6 +565,11 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
   .hero__grid, .how, .shop, .cancel, .faq, .final, .contact { grid-template-columns: 1fr; }
   .promo-alert__card { align-items: flex-start; flex-direction: column; }
   .promo-alert__spider { right: 14px; width: 30px; height: 58px; opacity: .45; }
+  .halloween-flight__bat--one { top: 26vh; }
+  .halloween-flight__bat--two { top: 48vh; right: 1vw; }
+  .halloween-flight__bat--three { top: 68vh; }
+  .halloween-flight__bat--four { top: 83vh; }
+  .halloween-flight__bat--five { display: none; }
   .side { position: static; }
   .quick { grid-template-columns: 1fr 1fr; }
   .cards3, .sci { grid-template-columns: 1fr; }
