@@ -1,10 +1,14 @@
 {%- if section.blocks.size > 0 -%}
+  {%- assign halloween_fact_now = 'now' | date: '%s' | plus: 0 -%}
   <div class="strip" aria-label="Product facts">
     <div class="strip__track" style="animation-duration: {{ section.settings.speed }}s">
       {%- for i in (1..2) -%}
         <ul{% if i == 2 %} aria-hidden="true"{% endif %}>
           {%- for block in section.blocks -%}
-            <li{% if i == 1 %} {{ block.shopify_attributes }}{% endif %}>{{ block.settings.text | escape }}</li>
+            {%- assign fact_text = block.settings.text | upcase -%}
+            {%- unless fact_text contains 'SPOOKTOBER' and halloween_fact_now >= 1793941200 -%}
+              <li{% if i == 1 %} {{ block.shopify_attributes }}{% endif %}>{{ block.settings.text | escape }}</li>
+            {%- endunless -%}
           {%- endfor -%}
         </ul>
       {%- endfor -%}

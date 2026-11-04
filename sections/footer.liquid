@@ -39,7 +39,7 @@
         <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</span>
         <span>{{ section.settings.bottom_note | escape }}</span>
         {%- assign halloween_now = 'now' | date: '%s' | plus: 0 -%}
-        {%- if halloween_now < 1793768400 -%}
+        {%- if halloween_now < 1793941200 -%}
           <span class="ftr__halloween">
             <button class="halloween-egg" type="button" aria-label="Reveal a Halloween surprise" aria-expanded="false" aria-controls="HalloweenEggMessage" data-halloween-egg>
               <svg viewBox="0 0 120 64" aria-hidden="true" focusable="false"><use href="#halloween-bat"/></svg>

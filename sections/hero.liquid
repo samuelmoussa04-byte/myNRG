@@ -1,22 +1,29 @@
 {%- assign promo_product = section.settings.promo_product -%}
 {%- assign promo_variant = promo_product.selected_or_first_available_variant -%}
+{%- assign halloween_promo_now = 'now' | date: '%s' | plus: 0 -%}
+{%- assign halloween_promo_active = false -%}
+{%- if halloween_promo_now < 1793941200 -%}
+  {%- assign halloween_promo_active = true -%}
+{%- endif -%}
 {%- if promo_variant.compare_at_price > promo_variant.price -%}
   {%- assign promo_savings = promo_variant.compare_at_price | minus: promo_variant.price -%}
   {%- assign promo_percentage = promo_savings | times: 100.0 | divided_by: promo_variant.compare_at_price | round -%}
 {%- endif -%}
 <section class="hero"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | escape }}"{% endif %}>
-  <svg class="hero__web hero__web--left" viewBox="0 0 110 86" aria-hidden="true" focusable="false">
-    <path d="M0 0v86M0 0h110M0 0l82 86M0 0l110 55M0 0l54 86M0 0l110 28M0 0l28 86M0 0l110 75M0 22c23 0 28 9 31 25 3 15 12 23 30 25M0 43c16 0 22 7 26 19 3 9 9 14 21 16M0 64c10 0 15 4 19 11"/>
-  </svg>
-  <svg class="hero__web hero__web--right" viewBox="0 0 110 86" aria-hidden="true" focusable="false">
-    <path d="M110 0v86M110 0H0M110 0 28 86M110 0 0 55M110 0 56 86M110 0 0 28M110 0 82 86M110 0 0 75M110 22c-23 0-28 9-31 25-3 15-12 23-30 25M110 43c-16 0-22 7-26 19-3 9-9 14-21 16M110 64c-10 0-15 4-19 11"/>
-  </svg>
-  <svg class="hero__bat hero__bat--left" viewBox="0 0 120 64" aria-hidden="true" focusable="false"><use href="#halloween-bat"/></svg>
-  <svg class="hero__bat hero__bat--right" viewBox="0 0 120 64" aria-hidden="true" focusable="false"><use href="#halloween-bat"/></svg>
+  {%- if halloween_promo_active -%}
+    <svg class="hero__web hero__web--left" viewBox="0 0 110 86" aria-hidden="true" focusable="false">
+      <path d="M0 0v86M0 0h110M0 0l82 86M0 0l110 55M0 0l54 86M0 0l110 28M0 0l28 86M0 0l110 75M0 22c23 0 28 9 31 25 3 15 12 23 30 25M0 43c16 0 22 7 26 19 3 9 9 14 21 16M0 64c10 0 15 4 19 11"/>
+    </svg>
+    <svg class="hero__web hero__web--right" viewBox="0 0 110 86" aria-hidden="true" focusable="false">
+      <path d="M110 0v86M110 0H0M110 0 28 86M110 0 0 55M110 0 56 86M110 0 0 28M110 0 82 86M110 0 0 75M110 22c-23 0-28 9-31 25-3 15-12 23-30 25M110 43c-16 0-22 7-26 19-3 9-9 14-21 16M110 64c-10 0-15 4-19 11"/>
+    </svg>
+    <svg class="hero__bat hero__bat--left" viewBox="0 0 120 64" aria-hidden="true" focusable="false"><use href="#halloween-bat"/></svg>
+    <svg class="hero__bat hero__bat--right" viewBox="0 0 120 64" aria-hidden="true" focusable="false"><use href="#halloween-bat"/></svg>
+  {%- endif -%}
   <div class="wrap hero__grid">
     <div>
       {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
-      {%- if promo_variant.compare_at_price > promo_variant.price -%}
+      {%- if halloween_promo_active and promo_variant.compare_at_price > promo_variant.price -%}
         <div class="hero__promo" aria-label="Spooktober special: save {{ promo_percentage }} percent">
           <span class="hero__promo-label">Spooktober special · Save {{ promo_percentage }}%</span>
           <span class="hero__promo-prices">
@@ -55,11 +62,13 @@
           <div class="photo__tag"><strong>{{ section.settings.tag_title | escape }}</strong>{{ section.settings.tag_text | escape }}</div>
         {%- endif -%}
       </div>
-      <svg class="hero__spider" viewBox="0 0 30 76" aria-hidden="true" focusable="false">
-        <path d="M15 0v43" />
-        <ellipse cx="15" cy="50" rx="4" ry="5" />
-        <path d="m12 48-6-4m6 8-7 2m12-6 6-4m-6 8 7 2m-11 0-5 7m8-7 5 7" />
-      </svg>
+      {%- if halloween_promo_active -%}
+        <svg class="hero__spider" viewBox="0 0 30 76" aria-hidden="true" focusable="false">
+          <path d="M15 0v43" />
+          <ellipse cx="15" cy="50" rx="4" ry="5" />
+          <path d="m12 48-6-4m6 8-7 2m12-6 6-4m-6 8 7 2m-11 0-5 7m8-7 5 7" />
+        </svg>
+      {%- endif -%}
     </div>
   </div>
 </section>

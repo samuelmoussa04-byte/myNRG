@@ -13,6 +13,7 @@
   assign days_per = section.settings.days_per_bottle | default: 120
   assign anchor = section.settings.anchor_id | default: 'shop'
   assign tag = heading_tag | default: 'h2'
+  assign halloween_offer_now = 'now' | date: '%s' | plus: 0
 
   assign has_plans = false
   if product.selling_plan_groups.size > 0
@@ -166,11 +167,18 @@
     </div>
 
     {%- if section.settings.assure_1 != blank or section.settings.assure_2 != blank or section.settings.assure_3 != blank -%}
-      <ul class="assure">
-        {%- if section.settings.assure_1 != blank -%}<li><svg aria-hidden="true"><use href="#i-free"/></svg>{{ section.settings.assure_1 | escape }}</li>{%- endif -%}
+      {%- assign halloween_assurance = section.settings.assure_1 | upcase -%}
+      {%- assign show_assure_1 = true -%}
+      {%- if halloween_assurance contains 'SPOOKTOBER' and halloween_offer_now >= 1793941200 -%}
+        {%- assign show_assure_1 = false -%}
+      {%- endif -%}
+      {%- if show_assure_1 or section.settings.assure_2 != blank or section.settings.assure_3 != blank -%}
+        <ul class="assure">
+        {%- if show_assure_1 and section.settings.assure_1 != blank -%}<li><svg aria-hidden="true"><use href="#i-free"/></svg>{{ section.settings.assure_1 | escape }}</li>{%- endif -%}
         {%- if section.settings.assure_2 != blank -%}<li><svg aria-hidden="true"><use href="#i-cancel"/></svg>{{ section.settings.assure_2 | escape }}</li>{%- endif -%}
         {%- if section.settings.assure_3 != blank -%}<li><svg aria-hidden="true"><use href="#i-shield"/></svg>{{ section.settings.assure_3 | escape }}</li>{%- endif -%}
-      </ul>
+        </ul>
+      {%- endif -%}
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}

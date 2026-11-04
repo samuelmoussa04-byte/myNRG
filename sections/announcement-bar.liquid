@@ -1,11 +1,15 @@
 {%- if section.blocks.size > 0 -%}
+  {%- assign halloween_announcement_now = 'now' | date: '%s' | plus: 0 -%}
   <div class="announce" data-announce>
     <ul>
       {%- for block in section.blocks -%}
-        <li {{ block.shopify_attributes }}>
-          {%- if block.settings.icon != 'none' -%}<svg aria-hidden="true"><use href="#i-{{ block.settings.icon }}"/></svg>{%- endif -%}
-          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" style="color:inherit;text-decoration:none">{{ block.settings.text | escape }}</a>{%- else -%}{{ block.settings.text | escape }}{%- endif -%}
-        </li>
+        {%- assign announcement_text = block.settings.text | upcase -%}
+        {%- unless announcement_text contains 'SPOOKTOBER' and halloween_announcement_now >= 1793941200 -%}
+          <li {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != 'none' -%}<svg aria-hidden="true"><use href="#i-{{ block.settings.icon }}"/></svg>{%- endif -%}
+            {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" style="color:inherit;text-decoration:none">{{ block.settings.text | escape }}</a>{%- else -%}{{ block.settings.text | escape }}{%- endif -%}
+          </li>
+        {%- endunless -%}
       {%- endfor -%}
     </ul>
   </div>
