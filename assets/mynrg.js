@@ -209,12 +209,20 @@
     var buyVisible = false;
     var stickyBaseBottom = 12;
     var footerFrame = 0;
+    var footerGap = 24;
     var updateFooterPosition = function () {
       if (!footer) return;
       var footerTop = footer.getBoundingClientRect().top;
-      var shift = Math.max(0, window.innerHeight - footerTop - stickyBaseBottom - 24);
-      sticky.style.setProperty('--sticky-footer-shift', shift + 'px');
-      sticky.classList.toggle('is-footer-tracking', shift > 0);
+      var footerBoundary = window.innerHeight - stickyBaseBottom + footerGap;
+      var footerStopped = sticky.classList.contains('is-footer-stopped');
+      if (footerTop <= footerBoundary && !footerStopped) {
+        var stickyTop = window.scrollY + window.innerHeight - stickyBaseBottom - sticky.offsetHeight;
+        sticky.style.setProperty('--sticky-footer-top', stickyTop + 'px');
+        sticky.classList.add('is-footer-stopped');
+      } else if (footerTop > footerBoundary && footerStopped) {
+        sticky.classList.remove('is-footer-stopped');
+        sticky.style.removeProperty('--sticky-footer-top');
+      }
     };
     var scheduleFooterPosition = function () {
       if (footerFrame) return;
