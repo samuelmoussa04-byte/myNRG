@@ -48,6 +48,9 @@
       {%- if section.settings.show_button and section.settings.button_label != blank -%}
         <a class="btn btn--blue hdr__btn" href="{{ section.settings.button_link | default: '#shop' }}">{{ section.settings.button_label | escape }}</a>
       {%- endif -%}
+      <a class="hdr__icon hdr__account" href="{{ routes.account_url }}" aria-label="{% if customer %}Your account{% else %}Log in to your account{% endif %}">
+        <svg aria-hidden="true"><use href="#i-person"/></svg>
+      </a>
       <a class="hdr__icon" href="{{ routes.cart_url }}" aria-label="Cart, {{ cart.item_count }} items">
         <svg aria-hidden="true"><use href="#i-bag"/></svg>
         {%- if cart.item_count > 0 -%}<span class="hdr__count">{{ cart.item_count }}</span>{%- endif -%}
