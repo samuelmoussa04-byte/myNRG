@@ -115,6 +115,11 @@ button { font: inherit; color: inherit; }
 .hdr__icon { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; text-decoration: none; color: var(--ink); background: transparent; border: 0; cursor: pointer; position: relative; }
 .hdr__icon:hover { background: var(--sand-2); }
 .hdr__icon svg { width: 22px; height: 22px; }
+.hdr__account-wrap { display: flex; align-items: center; gap: 8px; }
+shopify-account.hdr__account { display: block; width: 44px; height: 44px; --shopify-account-avatar-size: 36px; --shopify-account-color-accent: var(--cobalt); --shopify-account-color-background: var(--paper); --shopify-account-color-text: var(--ink); }
+.hdr__account-guest { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 50%; color: var(--ink); }
+.hdr__account-guest svg { width: 22px; height: 22px; }
+.hdr__account-name { max-width: 128px; overflow: hidden; color: var(--ink-2); font-size: 13px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
 .hdr__count { position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--cobalt); color: var(--white); font-size: 11px; font-weight: 700; display: grid; place-items: center; box-shadow: 0 0 0 2px var(--paper); }
 .hdr__menu { display: none; }
 .hdr__drawer { display: none; border-top: 1px solid var(--line); padding-block: 8px 16px; }
@@ -580,6 +585,7 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
 @media (max-width: 640px) {
   .announce li { display: none; }
   .announce li.is-active, .announce:not(.is-cycling) li:first-child { display: inline-flex; }
+  .hdr__account-name { display: none; }
 }
 @media (max-width: 520px) {
   body { font-size: 16px; }

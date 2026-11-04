@@ -48,9 +48,17 @@
       {%- if section.settings.show_button and section.settings.button_label != blank -%}
         <a class="btn btn--blue hdr__btn" href="{{ section.settings.button_link | default: '#shop' }}">{{ section.settings.button_label | escape }}</a>
       {%- endif -%}
-      <a class="hdr__icon hdr__account" href="{{ routes.account_url }}" aria-label="{% if customer %}Your account{% else %}Log in to your account{% endif %}">
-        <svg aria-hidden="true"><use href="#i-person"/></svg>
-      </a>
+      {%- if shop.customer_accounts_enabled -%}
+        <div class="hdr__account-wrap">
+          <shopify-account class="hdr__account" menu="{{ section.settings.customer_account_menu | default: 'customer-account-main-menu' }}">
+            <span slot="signed-out-avatar" class="hdr__account-guest" aria-hidden="true"><svg><use href="#i-person"/></svg></span>
+          </shopify-account>
+          {%- if customer -%}
+            {%- assign account_name = customer.first_name | default: customer.name -%}
+            {%- if account_name != blank -%}<span class="hdr__account-name">Hi, {{ account_name | escape }}</span>{%- endif -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
       <a class="hdr__icon" href="{{ routes.cart_url }}" aria-label="Cart, {{ cart.item_count }} items">
         <svg aria-hidden="true"><use href="#i-bag"/></svg>
         {%- if cart.item_count > 0 -%}<span class="hdr__count">{{ cart.item_count }}</span>{%- endif -%}
@@ -79,7 +87,8 @@
     { "type": "header", "content": "Button" },
     { "type": "checkbox", "id": "show_button", "label": "Show button", "default": true },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
-    { "type": "text", "id": "button_link", "label": "Button link", "default": "/#shop" }
+    { "type": "text", "id": "button_link", "label": "Button link", "default": "/#shop" },
+    { "type": "link_list", "id": "customer_account_menu", "label": "Customer account menu", "default": "customer-account-main-menu" }
   ],
   "enabled_on": { "groups": ["header"] }
 }
