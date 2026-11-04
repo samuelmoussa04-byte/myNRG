@@ -208,38 +208,28 @@
     var footer = document.querySelector('.ftr');
     var buyVisible = false;
     var stickyBaseBottom = 12;
-    var footerFrame = 0;
-    var measureStickyBaseBottom = function () {
-      sticky.style.removeProperty('--sticky-footer-offset');
-      stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
-    };
+    var stickyHeight = 0;
     var updateFooterPosition = function () {
       if (!footer) return;
       var footerTop = footer.getBoundingClientRect().top;
-      var offset = Math.max(0, window.innerHeight - footerTop - stickyBaseBottom);
-      sticky.style.setProperty('--sticky-footer-offset', offset + 'px');
-    };
-    var scheduleFooterPosition = function () {
-      if (footerFrame) return;
-      footerFrame = window.requestAnimationFrame(function () {
-        footerFrame = 0;
-        updateFooterPosition();
-      });
+      var footerClearance = stickyHeight + stickyBaseBottom + 24;
+      sticky.classList.toggle('is-footer-hidden', footerTop <= window.innerHeight - footerClearance);
     };
     var update = function () {
       var past = window.scrollY > Math.min(700, window.innerHeight * 0.9);
       sticky.classList.toggle('is-visible', past && !buyVisible);
-      scheduleFooterPosition();
+      updateFooterPosition();
     };
-    measureStickyBaseBottom();
-    updateFooterPosition();
+    stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
+    stickyHeight = sticky.getBoundingClientRect().height;
     new IntersectionObserver(function (entries) {
       buyVisible = entries[0].isIntersecting;
       update();
     }, { threshold: 0.05 }).observe(buyBox);
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', function () {
-      measureStickyBaseBottom();
+      stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
+      stickyHeight = sticky.getBoundingClientRect().height;
       update();
     });
     document.addEventListener('mynrg:buy-change', function (e) {
