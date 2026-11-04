@@ -454,9 +454,9 @@ shopify-account.hdr__account { display: block; width: 44px; height: 44px; --shop
 .ftr__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; color: #8B8F97; }
 
 /* ---------- sticky mobile buy bar (Seed) ---------- */
-.sticky-buy { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 60; display: none; align-items: center; gap: 12px; padding: 8px 8px 8px 8px; border-radius: var(--r-pill); background: var(--ink); color: var(--white); box-shadow: 0 16px 40px -12px rgba(17, 18, 20, .45); transform: translateY(150%); transition: transform .3s cubic-bezier(.22, 1, .36, 1), opacity .2s ease; }
-.sticky-buy.is-visible { transform: translateY(0); }
-.sticky-buy.is-footer-hidden { transform: translateY(12px); opacity: 0; pointer-events: none; }
+.sticky-buy { --sticky-footer-shift: 0px; position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 60; display: none; align-items: center; gap: 12px; padding: 8px 8px 8px 8px; border-radius: var(--r-pill); background: var(--ink); color: var(--white); box-shadow: 0 16px 40px -12px rgba(17, 18, 20, .45); transform: translateY(150%); transition: transform .3s cubic-bezier(.22, 1, .36, 1); }
+.sticky-buy.is-visible { transform: translateY(calc(0px - var(--sticky-footer-shift))); }
+.sticky-buy.is-footer-tracking { transition: none; }
 .sticky-buy__thumb { width: 44px; height: 44px; border-radius: 50%; background: var(--sand); overflow: hidden; flex: none; }
 .sticky-buy__thumb img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); }
 .sticky-buy__txt { flex: 1; min-width: 0; line-height: 1.2; }
@@ -617,8 +617,7 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
 /* ---------- sticky buy bar on desktop (optional) ---------- */
 @media (min-width: 861px) {
   .sticky-buy--desktop { display: flex; left: 50%; right: auto; bottom: 20px; width: min(760px, calc(100% - 48px)); transform: translate(-50%, 150%); }
-  .sticky-buy--desktop.is-visible { transform: translate(-50%, 0); }
-  .sticky-buy--desktop.is-footer-hidden { transform: translate(-50%, 12px); }
+  .sticky-buy--desktop.is-visible { transform: translate(-50%, calc(0px - var(--sticky-footer-shift))); }
 }
 
 /* ---------- review carousel (continuous, pauses on hover / tap) ---------- */

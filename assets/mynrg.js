@@ -208,20 +208,28 @@
     var footer = document.querySelector('.ftr');
     var buyVisible = false;
     var stickyBaseBottom = 12;
-    var stickyHeight = 0;
+    var footerFrame = 0;
     var updateFooterPosition = function () {
       if (!footer) return;
       var footerTop = footer.getBoundingClientRect().top;
-      var footerClearance = stickyHeight + stickyBaseBottom + 24;
-      sticky.classList.toggle('is-footer-hidden', footerTop <= window.innerHeight - footerClearance);
+      var shift = Math.max(0, window.innerHeight - footerTop - stickyBaseBottom - 24);
+      sticky.style.setProperty('--sticky-footer-shift', shift + 'px');
+      sticky.classList.toggle('is-footer-tracking', shift > 0);
+    };
+    var scheduleFooterPosition = function () {
+      if (footerFrame) return;
+      footerFrame = window.requestAnimationFrame(function () {
+        footerFrame = 0;
+        updateFooterPosition();
+      });
     };
     var update = function () {
       var past = window.scrollY > Math.min(700, window.innerHeight * 0.9);
       sticky.classList.toggle('is-visible', past && !buyVisible);
-      updateFooterPosition();
+      scheduleFooterPosition();
     };
     stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
-    stickyHeight = sticky.getBoundingClientRect().height;
+    updateFooterPosition();
     new IntersectionObserver(function (entries) {
       buyVisible = entries[0].isIntersecting;
       update();
@@ -229,7 +237,6 @@
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', function () {
       stickyBaseBottom = parseFloat(window.getComputedStyle(sticky).bottom) || stickyBaseBottom;
-      stickyHeight = sticky.getBoundingClientRect().height;
       update();
     });
     document.addEventListener('mynrg:buy-change', function (e) {
