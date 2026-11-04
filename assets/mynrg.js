@@ -26,6 +26,17 @@
     });
   });
 
+  /* ---------- Halloween footer easter egg ---------- */
+  document.querySelectorAll('[data-halloween-egg]').forEach(function (btn) {
+    var message = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!message) return;
+    btn.addEventListener('click', function () {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      message.hidden = expanded;
+    });
+  });
+
   /* ---------- announcement rotation (phones) ---------- */
   document.querySelectorAll('[data-announce]').forEach(function (bar) {
     var items = bar.querySelectorAll('li');
