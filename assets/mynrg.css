@@ -147,22 +147,29 @@ shopify-account.hdr__account { display: block; width: 44px; height: 44px; --shop
 .hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 24px; }
 .hero__note { margin: 14px 0 0; font-size: 14.5px; color: var(--ink-3); }
 
-/* ---------- special offer alert ---------- */
+/* ---------- final-day promotion alert ---------- */
 .promo-alert { padding-block: 12px clamp(18px, 2.5vw, 30px); }
 .promo-alert__card {
   position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center; justify-content: space-between;
   gap: 20px; padding: clamp(16px, 2vw, 22px) clamp(20px, 3vw, 32px); border-radius: 22px;
-  color: var(--white); background: radial-gradient(ellipse at 12% 100%, rgba(84, 125, 196, .24), transparent 34%), radial-gradient(ellipse at 92% 10%, rgba(84, 125, 196, .36), transparent 38%), linear-gradient(115deg, var(--cobalt-deep), var(--cobalt));
+  color: var(--white); background: radial-gradient(ellipse at 12% 100%, rgba(221, 100, 44, .22), transparent 34%), radial-gradient(ellipse at 92% 10%, rgba(84, 125, 196, .36), transparent 38%), linear-gradient(115deg, var(--cobalt-deep), var(--cobalt));
   box-shadow: 0 12px 28px rgba(18, 40, 90, .14);
 }
+.promo-alert__card::before { position: absolute; z-index: 0; top: 0; right: 0; width: clamp(140px, 20vw, 230px); height: 100%; content: ""; opacity: .25; background: repeating-conic-gradient(from 0deg at 100% 0%, transparent 0deg 14deg, rgba(229, 201, 143, .7) 14deg 14.8deg, transparent 15deg 30deg), repeating-radial-gradient(circle at 100% 0%, transparent 0 17px, rgba(229, 201, 143, .7) 18px 19px, transparent 20px 30px); mask-image: radial-gradient(ellipse at 100% 0%, #000 0 38%, transparent 76%); }
 .promo-alert__content { position: relative; z-index: 2; }
-.promo-alert__eyebrow { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; color: #BFD4FF; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-.promo-alert__eyebrow span { width: 7px; height: 7px; border-radius: 50%; background: #89B7FF; box-shadow: 0 0 0 3px rgba(137, 183, 255, .16); }
+.promo-alert__spider { position: absolute; z-index: 1; top: -1px; right: 29%; width: 40px; height: 78px; color: #E5C98F; transform-origin: top center; animation: halloween-spider-sway 4.5s ease-in-out infinite; }
+.promo-alert__spider-thread, .promo-alert__spider-legs { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.promo-alert__spider-body { fill: currentColor; }
+.promo-alert__spider-legs { stroke-width: 1.25; }
+.promo-alert__eyebrow { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; color: #F4C982; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.promo-alert__eyebrow span { width: 7px; height: 7px; border-radius: 50%; background: #E5C98F; box-shadow: 0 0 0 3px rgba(229, 201, 143, .16); }
+.promo-alert__pumpkin { width: 16px; height: 16px; margin-left: 2px; color: #F28A45; }
 .promo-alert__title { max-width: 28ch; margin: 0; color: var(--white); font-size: clamp(1.25rem, 2vw, 1.8rem); font-weight: 650; line-height: 1.08; letter-spacing: -.035em; text-wrap: balance; }
 .promo-alert__text { max-width: 56ch; margin: 5px 0 0; color: rgba(255, 255, 255, .82); font-size: clamp(.88rem, 1vw, .98rem); }
 .promo-alert__button { flex: 0 0 auto; position: relative; z-index: 2; gap: 8px; min-height: 44px; padding-inline: 20px; font-size: 14px; }
 .promo-alert__button span { font-size: 18px; line-height: 1; transition: transform .15s ease; }
 .promo-alert__button:hover span { transform: translateX(3px); }
+@keyframes halloween-spider-sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 /* ---------- seasonal Halloween accents ---------- */
 .halloween-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 .halloween-bat__eye { fill: #F28A45; }
@@ -565,6 +572,7 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
   .hero__grid, .how, .shop, .cancel, .faq, .final, .contact { grid-template-columns: 1fr; }
   .hero__bat, .hero__web { display: none; }
   .promo-alert__card { align-items: flex-start; flex-direction: column; }
+  .promo-alert__spider { right: 14px; width: 30px; height: 58px; opacity: .45; }
   .side { position: static; }
   .quick { grid-template-columns: 1fr 1fr; }
   .cards3, .sci { grid-template-columns: 1fr; }
@@ -601,6 +609,7 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .strip__track { animation: none; }
+  .promo-alert__spider { animation: none; }
   .btn, .sticky-buy, .pack { transition: none; }
 }
 
