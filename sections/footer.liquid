@@ -1,30 +1,30 @@
 <footer class="ftr">
   <div class="wrap">
     <div class="ftr__top">
-      <p class="ftr__blurb">{{ section.settings.blurb | escape }}</p>
-      {%- if section.settings.menu_1 != blank -%}
-        <div>
-          <h4>{{ section.settings.heading_1 | escape }}</h4>
-          <ul>
-            {%- for link in section.settings.menu_1.links -%}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{%- endfor -%}
-          </ul>
-        </div>
-      {%- endif -%}
-      {%- if section.settings.menu_2 != blank -%}
-        <div>
-          <h4>{{ section.settings.heading_2 | escape }}</h4>
-          <ul>
-            {%- for link in section.settings.menu_2.links -%}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{%- endfor -%}
-          </ul>
-        </div>
-      {%- endif -%}
-      <div>
-        <h4>{{ section.settings.heading_3 | escape }}</h4>
+      <nav class="ftr__column" aria-label="Support">
+        <h4>Support</h4>
         <ul>
-          {%- if section.settings.contact_link != blank -%}<li><a href="{{ section.settings.contact_link }}">{{ section.settings.contact_label | escape }}</a></li>{%- endif -%}
-          {%- if settings.support_email != blank -%}<li><span style="color:#B5B8BF;font-size:14px;overflow-wrap:anywhere">{{ settings.support_email | escape }}</span></li>{%- endif -%}
+          <li><a href="/pages/track-your-order">Track Your Order</a></li>
+          <li><a href="/pages/contact-1">Contact Us</a></li>
+          {%- if shop.refund_policy.url != blank -%}<li><a href="{{ shop.refund_policy.url }}">Refund Policy</a></li>{%- endif -%}
+          {%- if shop.shipping_policy.url != blank -%}<li><a href="{{ shop.shipping_policy.url }}">Shipping Policy</a></li>{%- endif -%}
+          <li><a href="/pages/order-cancellation">Order Cancellation</a></li>
+          <li><a href="/pages/subscription-policy">Subscription Policy</a></li>
         </ul>
-      </div>
+      </nav>
+      <nav class="ftr__column" aria-label="Legal">
+        <h4>Legal</h4>
+        <ul>
+          {%- if shop.privacy_policy.url != blank -%}<li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>{%- endif -%}
+          {%- if shop.terms_of_service.url != blank -%}<li><a href="{{ shop.terms_of_service.url }}">Terms of Service</a></li>{%- endif -%}
+        </ul>
+      </nav>
+      <nav class="ftr__column" aria-label="Shop">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="{{ routes.all_products_collection_url }}">Shop MyNrg</a></li>
+        </ul>
+      </nav>
     </div>
 
     {%- if section.settings.show_wordmark -%}
@@ -57,18 +57,6 @@
   "name": "Footer",
   "tag": "div",
   "settings": [
-    { "type": "textarea", "id": "blurb", "label": "About text", "default": "MyNrg is a daily NAD+ and resveratrol supplement for the afternoon wall. Ships to the United States and Canada." },
-    { "type": "header", "content": "Column 1" },
-    { "type": "text", "id": "heading_1", "label": "Heading", "default": "Shop" },
-    { "type": "link_list", "id": "menu_1", "label": "Menu", "default": "main-menu" },
-    { "type": "header", "content": "Column 2" },
-    { "type": "text", "id": "heading_2", "label": "Heading", "default": "Help" },
-    { "type": "link_list", "id": "menu_2", "label": "Menu", "default": "footer", "info": "Good place for Shipping, Refund policy, Privacy policy and Terms." },
-    { "type": "header", "content": "Column 3 (contact)" },
-    { "type": "text", "id": "heading_3", "label": "Heading", "default": "Contact" },
-    { "type": "text", "id": "contact_label", "label": "Contact link label", "default": "Contact us" },
-    { "type": "text", "id": "contact_link", "label": "Contact link", "default": "/pages/contact" },
-    { "type": "paragraph", "content": "The support email comes from Theme settings > Brand." },
     { "type": "header", "content": "Big logo" },
     { "type": "checkbox", "id": "show_wordmark", "label": "Show big logo", "default": true },
     { "type": "text", "id": "wordmark_1", "label": "First part", "default": "My" },

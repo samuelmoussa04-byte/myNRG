@@ -440,11 +440,10 @@ shopify-account.hdr__account { display: block; width: 44px; height: 44px; --shop
 
 /* ---------- footer (big wordmark, grüns / Seed) ---------- */
 .ftr { background: var(--ink); color: var(--white); padding-block: clamp(40px, 5vw, 60px) 24px; margin-top: var(--sec-y); }
-.ftr__top { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 32px; }
-.ftr__blurb { color: #B5B8BF; max-width: 34ch; margin: 0; font-size: 15.5px; }
-.ftr h4 { margin: 0 0 14px; font-size: 12.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: #8B8F97; }
+.ftr__top { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.ftr h4 { margin: 0 0 20px; font-size: 13px; font-weight: 500; letter-spacing: .02em; text-transform: uppercase; color: #F07B22; }
 .ftr ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.ftr ul a { text-decoration: none; color: #E4E5E8; font-size: 15px; }
+.ftr ul a { text-decoration: none; color: #B5B8BF; font-size: 16px; }
 .ftr ul a:hover { color: var(--cobalt-mist); }
 .ftr__mark { font-weight: 720; font-size: clamp(3rem, 7.5vw, 6.5rem); letter-spacing: -.06em; line-height: .9; margin: clamp(40px, 5vw, 56px) 0 0; color: var(--white); }
 .ftr__mark span { color: #5B7FC7; }
@@ -565,8 +564,7 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
   .hdr__in { grid-template-columns: auto 1fr auto; }
   .hdr__in .logo { justify-self: center; }
   .day { grid-template-columns: 1fr 1fr; }
-  .ftr__top { grid-template-columns: 1fr 1fr; }
-  .ftr__top > :first-child { grid-column: 1 / -1; }
+  .ftr__top { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 }
 @media (max-width: 860px) {
   .hero__grid, .how, .shop, .cancel, .faq, .final, .contact { grid-template-columns: 1fr; }
@@ -601,7 +599,7 @@ textarea.field { min-height: 168px; padding: 14px 16px; line-height: 1.5; resize
   .steps li { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; }
   .steps__n { width: 40px; height: 40px; font-size: 15px; }
   .note { grid-template-columns: 1fr; }
-  .ftr__top { grid-template-columns: 1fr; }
+  .ftr__top { grid-template-columns: 1fr; gap: 28px; }
   .cart-line { grid-template-columns: 64px minmax(0, 1fr); }
   .cart-line__img { width: 64px; height: 64px; }
   .cart-line > :last-child { grid-column: 2; }
