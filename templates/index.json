@@ -374,6 +374,7 @@
     "reviews": {
       "type": "reviews",
       "settings": {
+        "heading_with_reviews": "What our early testers are saying",
         "note": "Shared by MyNrg customers in July 2026."
       },
       "blocks": {
