@@ -24,8 +24,8 @@
     <div>
       {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
       {%- if promo_variant.compare_at_price > promo_variant.price -%}
-        <div class="hero__promo" aria-label="Spooktober special: save {{ promo_percentage }} percent">
-          <span class="hero__promo-label">Spooktober special · Save {{ promo_percentage }}%</span>
+        <div class="hero__promo" aria-label="Last day for the Halloween special: save {{ promo_percentage }} percent">
+          <span class="hero__promo-label">Last day for the Halloween special · Save {{ promo_percentage }}%</span>
           <span class="hero__promo-prices">
             <strong>{{ promo_variant.price | money_with_currency }}</strong>
             <s>{{ promo_variant.compare_at_price | money_with_currency }}</s>
