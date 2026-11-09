@@ -38,11 +38,11 @@
                       <blockquote>{{ block.settings.text | escape | newline_to_br }}</blockquote>
                       {%- if block.settings.photo != blank or block.settings.photo_asset != blank -%}
                         {%- assign review_photo_alt = 'Photo shared by ' | append: block.settings.name -%}
-                        <figure class="rv-photo">
+                        <figure class="rv-photo" style="height: auto; overflow: visible; background: transparent;">
                           {%- if block.settings.photo != blank -%}
-                            {{ block.settings.photo | image_url: width: 640 | image_tag: alt: review_photo_alt, loading: 'lazy' }}
+                            {{ block.settings.photo | image_url: width: 640 | image_tag: alt: review_photo_alt, loading: 'lazy', style: 'display: block; width: auto; max-width: 100%; height: auto; max-height: 220px; object-fit: contain; border-radius: 12px;' }}
                           {%- else -%}
-                            <img src="{{ block.settings.photo_asset | asset_url }}" alt="{{ review_photo_alt | escape }}" width="640" loading="lazy">
+                            <img src="{{ block.settings.photo_asset | asset_url }}" alt="{{ review_photo_alt | escape }}" width="640" loading="lazy" style="display: block; width: auto; max-width: 100%; height: auto; max-height: 220px; object-fit: contain; border-radius: 12px;">
                           {%- endif -%}
                         </figure>
                       {%- endif -%}
