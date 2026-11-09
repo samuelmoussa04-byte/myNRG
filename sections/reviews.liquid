@@ -40,6 +40,8 @@
                         <div class="rv-avatar">
                           {%- if block.settings.photo != blank -%}
                             {{ block.settings.photo | image_url: width: 120, height: 120, crop: 'center' | image_tag: alt: '', loading: 'lazy' }}
+                          {%- elsif block.settings.photo_asset != blank -%}
+                            <img src="{{ block.settings.photo_asset | asset_url }}" alt="" width="120" height="120" loading="lazy">
                           {%- else -%}
                             {{ block.settings.name | slice: 0 | upcase | escape }}
                           {%- endif -%}
@@ -123,6 +125,7 @@
         { "type": "textarea", "id": "text", "label": "Review", "info": "Exactly as the person wrote it." },
         { "type": "text", "id": "date", "label": "Date (optional)" },
         { "type": "image_picker", "id": "photo", "label": "Photo (optional)", "info": "Only with the person's permission." },
+        { "type": "text", "id": "photo_asset", "label": "Theme asset filename (optional)", "info": "Used when the photo is stored in the theme assets. The photo picker takes precedence." },
         { "type": "text", "id": "badge", "label": "Label", "info": "Required for friends, family or free product, e.g. Friends & family, or Received free product.", "default": "Friends & family" }
       ]
     },
