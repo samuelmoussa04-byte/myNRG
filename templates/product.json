@@ -51,7 +51,7 @@
     "reviews": {
       "type": "reviews",
       "settings": {
-        "heading_with_reviews": "What 45,000 people are saying",
+        "heading_with_reviews": "What 45,000+ people are saying",
         "note": "Reviews from customers in our July 2026 test launch."
       },
       "blocks": {
